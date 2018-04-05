@@ -1,0 +1,32 @@
+sửa lại bìa theo đúng mẫu
+lời mở đầu: nói qua về bố cục của báo cáo, còn đâu có hẳn 1 trang để nói lời cảm ơn
+
+
+ không đúng
+sắp xếp lại thứ tự
+chưa có thụt đầu dòng
+
+căn lền 2 bên
+
+bảng trong báo cáo phải đánh số thứ tự và tên là bảng gì: chương 1 thì bảng 1.1: tên của bảng.
+hình trong báo cáo phải đánh số thứ tự và tên là hình gì: chương 1 thì hình 1.1: tên của hình. hình thì in màu
+
+số trang ở góc dưới bên phải
+
+cho hình ra giữa
+
+bỏ gạch chân của chữ
+
+phong chữ của code bỏ nền đen
+
+
+trước tài liệu tham khảo phải có tổng kết.
+tài liệu tham khảo không phải lài chương chỉ lài
+
+chương 2 tên nên là xây dụng ứng dụng.
+trong đó có 
+1 đặc tả bài toán
+2 pttkht
+3 cài đặt ứng dụng
+
+tối thứ 5 phòng tầng 3 nhà A9 301,302
