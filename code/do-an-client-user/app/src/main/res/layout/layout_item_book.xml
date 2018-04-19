@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp5"
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_marginRight="@dimen/dp5"
+        android:background="@drawable/bg_btn_item_book"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp5">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:src="@drawable/ic_bike" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/dp5"
+            android:text="@string/bike"
+            android:textColor="@color/color_grey"
+            android:textSize="@dimen/sp20" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/color_grey"
+            android:paddingBottom="@dimen/dp20"
+            android:paddingTop="@dimen/dp20" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/dp5"
+            android:text="@string/cost"
+            android:textColor="@color/color_red"
+            android:textSize="@dimen/sp20" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp5"
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_marginRight="@dimen/dp5"
+        android:background="@drawable/bg_btn_item_book"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp5">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:src="@drawable/ic_grabcar_premium" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/dp5"
+            android:text="@string/car4"
+            android:textColor="@color/color_grey"
+            android:textSize="@dimen/sp20" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/color_grey"
+            android:paddingBottom="@dimen/dp20"
+            android:paddingTop="@dimen/dp20" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/dp5"
+            android:text="@string/cost"
+            android:textColor="@color/color_red"
+            android:textSize="@dimen/sp20" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp5"
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_marginRight="@dimen/dp5"
+        android:background="@drawable/bg_btn_item_book"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp5">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:src="@drawable/ic_grabcar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/dp5"
+            android:text="@string/car7"
+            android:textColor="@color/color_grey"
+            android:textSize="@dimen/sp20" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/color_grey"
+            android:paddingBottom="@dimen/dp20"
+            android:paddingTop="@dimen/dp20" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/dp5"
+            android:text="@string/cost"
+            android:textColor="@color/color_red"
+            android:textSize="@dimen/sp20" />
+    </LinearLayout>
+</LinearLayout>

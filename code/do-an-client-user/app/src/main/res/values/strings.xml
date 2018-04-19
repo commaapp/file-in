@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Driper - Đặt xe</string>
+    <string name="title_activity_maps">Driper - Đặt xe</string>
+    <string name="phone">Số điện thoại</string>
+    <string name="name">Tên</string>
+    <string name="txt_register">Điền một số thông tin của bạn để tài xế có thể liên hệ tới bạn.</string>
+    <string name="next">Next</string>
+    <string name="txt_verify">Nhập mã 4 số chứng thực đã được gửi đến số điện thoại %d</string>
+    <string name="verify">Mã xác nhận</string>
+    <string name="resend"><u>Gửi lại mã</u></string>
+    <string name="choose_to">Chọn điểm đến</string>
+    <string name="book">Đặt xe</string>
+    <string name="bike">Xe Mô - tô</string>
+    <string name="cost">giá %d VNĐ</string>
+    <string name="car4">Ô-tô 4 chỗ</string>
+    <string name="car7">Ô-tô 7 chỗ</string>
+    <string name="finded_driver">Chúng tôi đã tìm thấy một tài xế</string>
+    <string name="driver_for">Driver %s</string>
+    <string name="for_minute">%d phút</string>
+    <string name="for_minute_driver_come">Tài xế sẽ đến đón bạn.</string>
+    <string name="txt_finding_driver">Đang tìm kiếm tài xế...</string>
+    <string name="cancel">Hủy</string>
+    <string name="cuoc_xe_done">Cuốc xe đã hoàn thành!</string>
+    <string name="danh_gia_cam_xuc">Hãy cho chúng tôi biết về cảm xúc của bạn?</string>
+    <string name="hai_long">Hài lòng</string>
+    <string name="khong_hai_long">Không hài lòng</string>
+    <string name="danh_gia_tai_xe">Cho điểm</string>
+    <string name="nhan_xet_tai_xe">Nhận xét</string>
+    <string name="danh_gia">Đánh giá của bạn về dịch vụ</string>
+    <string name="done">Gửi</string>
+    <string name="send">Gửi</string>
+</resources>

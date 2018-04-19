@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/bg_btn_item_book"
+    android:elevation="2dp"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_marginRight="@dimen/dp5"
+        android:layout_weight="1"
+
+        android:gravity="center"
+        android:padding="@dimen/dp10"
+        android:text="@string/for_minute"
+        android:textColor="@color/colorPrimary" />
+
+    <TextView
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_marginRight="@dimen/dp5"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="@dimen/dp5"
+        android:text="@string/for_minute_driver_come"
+        android:textColor="@color/color_black" />
+
+    <TextView
+        style="@style/TextAppearance.AppCompat.Small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_marginRight="@dimen/dp5"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="@dimen/dp10"
+        android:text="29H7.6377 - Honda - Dream"
+        android:textColor="@color/color_black" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp10"
+        android:background="@color/color_grey" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/dp5"
+            android:src="@drawable/img_profile_default" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/color_white"
+                android:gravity="center|left"
+                android:text="Lê Hồng Dương"
+                android:textColor="@color/color_black" />
+
+            <RatingBar
+                android:id="@+id/ratingbar"
+                style="@style/MyRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|left"
+                android:numStars="5"
+                android:rating="3" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_main"
+            android:padding="@dimen/dp10"
+            android:src="@drawable/ic_call" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_sms"
+            android:padding="@dimen/dp10"
+            android:src="@drawable/ic_sms" />
+    </LinearLayout>
+</LinearLayout>
