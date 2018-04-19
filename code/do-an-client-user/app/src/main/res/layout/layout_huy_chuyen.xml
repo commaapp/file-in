@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_marginRight="@dimen/dp5"
+        android:layout_weight="1"
+        android:elevation="2dp"
+        android:gravity="center"
+        android:padding="@dimen/dp20"
+        android:text="@string/chuyen_bi_huy"
+        android:textColor="@color/color_black"
+        android:textSize="@dimen/sp20" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_marginRight="@dimen/dp5"
+        android:layout_weight="1"
+        android:background="@drawable/bg_btn_main"
+        android:elevation="2dp"
+        android:gravity="center"
+        android:padding="@dimen/dp10"
+        android:text="@string/ok"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/sp20" />
+</LinearLayout>

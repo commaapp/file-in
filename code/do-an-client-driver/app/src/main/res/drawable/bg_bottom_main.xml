@@ -6,5 +6,4 @@
             <corners android:topLeftRadius="@dimen/dp20" android:topRightRadius="@dimen/dp20"></corners>
         </shape>
     </item>
-
 </selector>
