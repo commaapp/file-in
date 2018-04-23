@@ -45,4 +45,6 @@ public class MyCache {
         editor.clear();
         editor.commit();
     }
+
+
 }

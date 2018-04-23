@@ -1,5 +1,5 @@
 {
-  "name": "demosocket",
+  "name": "do-an-sẻver",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "express": "~4.16.0",
+    "mongodb": "^3.0.7",
     "socket.io": "^2.1.0"
   }
 }

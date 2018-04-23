@@ -11,8 +11,9 @@
         android:padding="@dimen/dp10">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp36"
+            android:layout_height="@dimen/dp36"
+            android:id="@+id/view_profile"
             android:layout_gravity="center"
             android:src="@drawable/ic_person" />
 
@@ -98,6 +99,7 @@
                     android:src="@drawable/ic_bike" />
 
                 <TextView
+                    android:id="@+id/tv_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -128,6 +130,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_book"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

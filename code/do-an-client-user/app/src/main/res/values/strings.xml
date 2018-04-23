@@ -31,4 +31,7 @@
     <string name="send">Gửi</string>
     <string name="chuyen_bi_huy">Xin lỗi, vì một lý do nào đó tài xế đã hủy cuốc xe của bạn.</string>
     <string name="ok">OK</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="personal_infor">Thông tin của bạn</string>
+    <string name="update">Sửa</string>
 </resources>

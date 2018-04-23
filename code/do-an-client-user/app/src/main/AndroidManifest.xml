@@ -14,22 +14,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="core.MainActivity">
-
-        </activity>
-
-        <service android:name="core.MyService" />
+        <activity android:name="main.MainActivity"/>
+        <service android:name="service.MyService" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <activity
+            android:name="main.MapsActivity"
+            android:label="@string/title_activity_maps" />
 
         <activity
-            android:name="core.main.MapsActivity"
-            android:label="@string/title_activity_maps">
-
-        </activity>
-        <activity
-            android:name="core.register.RegisterActivity"
+            android:name="login.LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +33,9 @@
             </intent-filter>
 
         </activity>
+        <activity
+            android:name="profile.ProfileActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 
 </manifest>
