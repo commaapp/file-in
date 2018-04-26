@@ -15,4 +15,8 @@
         <item name="colorControlActivated">#ffb700</item>
     </style>
 
+    <style name="MyTheme" parent="Theme.AppCompat.NoActionBar">
+            <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
 </resources>

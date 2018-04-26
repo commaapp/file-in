@@ -1,7 +1,9 @@
 var init = require("./init")
+
+nameCollection = "drivers"
 nameDatabase = "driper"
-var nameCollection = "customers"
 module.exports = {
+
     insert: function (json) {
         init(function (db) {
             db.db(nameDatabase).collection(nameCollection).insertOne(json, function (err, res) {
@@ -16,23 +18,19 @@ module.exports = {
             db.db(nameDatabase).collection(nameCollection).update(query, newValue, {upsert: true}, callback)
         })
     },
-    findIsExists: function (phoneNumber, callback) {
-        init(function (db) {
-            db.db(nameDatabase).collection(nameCollection).find({sdt: phoneNumber}).toArray(function (err, docs) {
-                callback(docs[0])
-            })
-        })
-    },
+
     findOne: function (phoneNumber, callback) {
         init(function (db) {
-            db.db(nameDatabase).collection(nameCollection).find({sdt: phoneNumber}).toArray(function (err, docs) {
+            db.db(nameDatabase).collection(nameCollection).find({phoneNumber: phoneNumber}).toArray(function (err, docs) {
                 callback(docs[0])
             })
         })
     },
-    updateNameCustom: function (query, newValue, callback) {
+    findAll: function ( callback) {
         init(function (db) {
-            db.db(nameDatabase).collection(nameCollection).updateOne(query, newValue, {upsert: true}, callback)
+            db.db(nameDatabase).collection(nameCollection).find().toArray(function (err, docs) {
+                callback(docs)
+            })
         })
     },
     delete: function (json) {

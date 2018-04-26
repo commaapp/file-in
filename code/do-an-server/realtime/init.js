@@ -1,12 +1,9 @@
-customlogin = require("./custom_login")
+custom_login = require("./custom")
+driver_login = require("./driver")
 module.exports = function (socket) {
-    socket.emit('CLIENT_CUSTOMER_CONNECT_SUCCES', JSON.stringify({hello: 'CLIENT_CUSTOMER_CONNECT_SUCCES'}));
+    socket.emit('CLIENT_CUSTOMER_CONNECT_SUCCES', {hello: 'CLIENT_CUSTOMER_CONNECT_SUCCES'});
 
-
-
-    customlogin(socket)
-
-
-
+    custom_login(socket)
+    driver_login(socket)
 
 }

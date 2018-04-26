@@ -18,7 +18,8 @@ public class MyApplication extends MultiDexApplication {
         super.onCreate();
         MyLog.setShow(true);
         startService(new Intent(this, MyService.class));
-    }
+}
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);

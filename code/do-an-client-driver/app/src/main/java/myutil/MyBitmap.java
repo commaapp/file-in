@@ -9,6 +9,7 @@ import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
+import android.util.Base64;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -135,7 +136,6 @@ public class MyBitmap {
             myBitmap.compress(Bitmap.CompressFormat.PNG, quality, outputStream);
             outputStream.flush();
             outputStream.close();
-
 //            openScreenshot(imageFile);
             return mPath;
         } catch (Throwable e) {
@@ -179,5 +179,82 @@ public class MyBitmap {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 10, stream);
         return stream.toByteArray();
+    }
+
+    public static Bitmap StringBase64ToBimap(String encodedImage) {
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+
+    public static String BimapBase64ToString(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+    public static  byte[]  Base64ToByte(String encodedImage) {
+       return Base64.decode(encodedImage, Base64.DEFAULT);
+    }
+    /**
+     * @param bitmap the Bitmap to be scaled
+     * @param threshold the maxium dimension (either width or height) of the scaled bitmap
+     * @param isNecessaryToKeepOrig is it necessary to keep the original bitmap? If not recycle the original bitmap to prevent memory leak.
+     * */
+
+    public static Bitmap getScaledDownBitmap(Bitmap bitmap, int threshold, boolean isNecessaryToKeepOrig){
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int newWidth = width;
+        int newHeight = height;
+
+        if(width > height && width > threshold){
+            newWidth = threshold;
+            newHeight = (int)(height * (float)newWidth/width);
+        }
+
+        if(width > height && width <= threshold){
+            //the bitmap is already smaller than our required dimension, no need to resize it
+            return bitmap;
+        }
+
+        if(width < height && height > threshold){
+            newHeight = threshold;
+            newWidth = (int)(width * (float)newHeight/height);
+        }
+
+        if(width < height && height <= threshold){
+            //the bitmap is already smaller than our required dimension, no need to resize it
+            return bitmap;
+        }
+
+        if(width == height && width > threshold){
+            newWidth = threshold;
+            newHeight = newWidth;
+        }
+
+        if(width == height && width <= threshold){
+            //the bitmap is already smaller than our required dimension, no need to resize it
+            return bitmap;
+        }
+
+        return getResizedBitmap(bitmap, newWidth, newHeight, isNecessaryToKeepOrig);
+    }
+
+    public static Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight, boolean isNecessaryToKeepOrig) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        if(!isNecessaryToKeepOrig){
+            bm.recycle();
+        }
+        return resizedBitmap;
     }
 }

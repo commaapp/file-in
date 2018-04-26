@@ -25,13 +25,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.socket.emitter.Emitter;
 import login.LoginActivity;
-import main.MainActivity;
 import myutil.MyCache;
 import myutil.MyLog;
 import obj.Customer;
 import service.MyService;
 
 public class ProfileActivity extends AppCompatActivity {
+
     @BindView(R.id.im_back)
     ImageView imBack;
     @BindView(R.id.tv_save)
@@ -64,12 +64,12 @@ public class ProfileActivity extends AppCompatActivity {
         layoutProfile.setVisibility(View.GONE);
     }
 
-
     private MyService mMyService;
+
+
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            MyLog.e(MainActivity.class, "onServiceDisconnected");
         }
 
         @Override

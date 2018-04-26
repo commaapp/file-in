@@ -1,12 +1,12 @@
 package service;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -82,10 +82,10 @@ public class MyService extends Service {
         return START_NOT_STICKY;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.ECLAIR)
+    @TargetApi(Build.VERSION_CODES.ECLAIR)
     private void runForeground() {
         Notification notification = new NotificationCompat.Builder(this)
-                .setContentTitle("Driper ")
+                .setContentTitle("Driver ")
                 .setContentText("Đang hoạt động")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setOngoing(true)
@@ -115,43 +115,31 @@ public class MyService extends Service {
         return super.onUnbind(intent);
     }
 
-    public void custemerRequestLogin(String sdt, Emitter.Listener onRequestRegister) {
-        mSocket.on(Config.ON_REQUEST_LOGIN, onRequestRegister);
-        mSocket.emit(Config.EMIT_REQUEST_LOGIN, sdt);
-        MyLog.e(getClass(), sdt);
 
-    }
-
-    public void custemerVefifyLoginSucces(String s, Emitter.Listener listener) {
-        mSocket.emit(Config.EMIT_REQUEST_LOGIN, s);
-    }
-
-    public void custemerVefifyPhonenumber(String phoneNumber, Emitter.Listener onVefify_Code_Res) {
-        mSocket.on(Config.Vefify_Code_Res, onVefify_Code_Res);
-        mSocket.emit(Config.Vefify_Phonenumber, phoneNumber);
-    }
-
-    public void custemerLogin(String jsonCustemer, Emitter.Listener listener) {
-        mSocket.on(Config.Custemer_Login_Res, listener);
-        mSocket.emit(Config.Custemer_Login, jsonCustemer);
-
-    }
-
-    public void checkLogin(String phoneNumber, Emitter.Listener listener) {
+    public void checkDriverLogin(String phoneNumber, Emitter.Listener listener) {
         mSocket.on(Config.Custemer_Check_Login_Res, listener);
         mSocket.emit(Config.Custemer_Check_Login, phoneNumber);
     }
 
-    public void getCustomProfile(String phoneNumber, Emitter.Listener listener) {
-        mSocket.on(Config.Custemer_View_Profile_Res, listener);
-        mSocket.emit(Config.Custemer_View_Profile, phoneNumber);
+    public void registerDriver(String json, Emitter.Listener listener) {
+        mSocket.on(Config.Driver_Regitor_Res, listener);
+        mSocket.emit(Config.Driver_Regitor, json);
     }
 
-    public void updateCustomProfile(Customer customer, Emitter.Listener listener) {
-        mSocket.on(Config.Custemer_Update_Profile_Res, listener);
-        mSocket.emit(Config.Custemer_Update_Profile, customer.toJSON());
+    public void driverVefifyPhonenumber(String phoneNumber, Emitter.Listener listener) {
+        mSocket.on(Config.Driper_Vefify_Code_Res, listener);
+        mSocket.emit(Config.Driper_Vefify_Phonenumber, phoneNumber);
     }
 
+    public void checkDriverIsExists(String phoneNumber, Emitter.Listener listener) {
+        mSocket.on(Config.checkDriverIsExists_Res, listener);
+        mSocket.emit(Config.checkDriverIsExists, phoneNumber);
+    }
+
+    public void getDriverProfile(String stringValueByName, Emitter.Listener listener) {
+        mSocket.on(Config.getDriverProfile_Res, listener);
+        mSocket.emit(Config.getDriverProfile, stringValueByName);
+    }
 
     public class MyBinder extends Binder {
         public MyService getMyService() {

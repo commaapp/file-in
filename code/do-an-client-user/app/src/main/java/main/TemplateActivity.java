@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 
-import myutil.MyLog;
 import service.MyService;
 
 public class TemplateActivity extends AppCompatActivity {
@@ -36,7 +35,6 @@ public class TemplateActivity extends AppCompatActivity {
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            MyLog.e(MainActivity.class, "onServiceDisconnected");
         }
 
         @Override

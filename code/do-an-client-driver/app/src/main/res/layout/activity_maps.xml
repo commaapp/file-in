@@ -11,24 +11,26 @@
         android:padding="@dimen/dp10">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp36"
+            android:layout_height="@dimen/dp36"
+            android:id="@+id/view_profile"
             android:layout_gravity="center"
             android:src="@drawable/ic_person" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/app_name"
             android:textColor="@color/color_white"
-            android:textSize="@dimen/sp20" />
+            android:textSize="@dimen/sp22" />
 
         <Switch
+            android:id="@+id/sw_ready"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp64"
             android:layout_gravity="center" />
     </LinearLayout>
 
@@ -44,21 +46,23 @@
             android:layout_height="match_parent" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_location"
+            android:id="@+id/fab_matdo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_margin="@dimen/dp20"
+            android:src="@drawable/ic_location"
             app:backgroundTint="@color/color_white" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_matdo"
+            android:id="@+id/fab_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/fab_location"
+            android:layout_above="@id/fab_matdo"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dp20"
+            android:src="@drawable/ic_my_location"
             app:backgroundTint="@color/color_white" />
     </RelativeLayout>
 

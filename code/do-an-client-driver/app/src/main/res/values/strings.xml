@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Driper - Đặt xe</string>
+    <string name="app_name">Driper - Tài xế</string>
     <string name="title_activity_maps">Driper - Đặt xe</string>
     <string name="phone">Số điện thoại</string>
     <string name="name">Tên</string>
-    <string name="txt_register">Điền một số thông tin của bạn để tài xế có thể liên hệ tới bạn.</string>
-    <string name="next">Tiếp theo</string>
+    <string name="txt_register">Đăng ký thông tin của bạn để trở thành đối tác của Driper</string>
+    <string name="next">Tiếp</string>
     <string name="txt_verify">Nhập mã 4 số chứng thực đã được gửi đến số điện thoại %d</string>
     <string name="verify">Mã xác nhận</string>
     <string name="resend"><u>Gửi lại mã</u></string>
@@ -50,4 +50,12 @@
     <string name="txt_lock">Chạm vào biểu tượng khóa để sẵn sàng nhận các quốc xe mới</string>
     <string name="lock">Bạn đã để trôi yêu cầu cuốc xe</string>
     <string name="apply">Xác nhận</string>
+    <string name="register_driper">Trở thành đối tác của Driper</string>
+    <string name="txt_register_cmt">Ảnh mặt trước và sau chứng minh thư</string>
+    <string name="txt_register_anh3x4">Ảnh chân dung có mặt của bạn</string>
+    <string name="txt_register_blx">Ảnh mặt trước và sau bằng lái xe</string>
+    <string name="txt_register_gtx">Ảnh mặt trước và sau giấy tờ xe</string>
+    <string name="txt_register_bao_hiem_xe">Ảnh mặt trước và sau bảo hiểm xe</string>
+    <string name="tag_im_path">path image</string>
+    <string name="hint">Biển số xe - Hãng xe - Tên xe</string>
 </resources>

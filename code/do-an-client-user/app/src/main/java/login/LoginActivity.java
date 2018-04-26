@@ -24,7 +24,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.socket.emitter.Emitter;
-import main.MainActivity;
 import main.MapsActivity;
 import myutil.MyCache;
 import myutil.MyLog;
@@ -93,9 +92,17 @@ public class LoginActivity extends Activity {
                     LoginActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            MyLog.e(getClass(), args[0].toString());
-                            Customer customer = new Gson().fromJson(args[0].toString(), Customer.class);
-                            login(customer.getSdt(), customer.getName());
+                            try {
+                                MyLog.e(getClass(), args[0].toString());
+                                Customer customer = new Gson().fromJson(args[0].toString(), Customer.class);
+                                login(customer.getSdt(), customer.getName());
+                            } catch (NullPointerException e) {
+                                MyLog.e(getClass(), "NullPointerException checkLogin");
+                                showLayoutLogin();
+                                startLogin();
+                            }
+
+
                         }
 
                     });
@@ -118,7 +125,6 @@ public class LoginActivity extends Activity {
                     @Override
                     public void run() {
                         MyCache.putStringValueByName(LoginActivity.this, Config.MY_CACHE, Config.ACCOUNT_PHONE_NUMBER, phoneNumber);
-
                         startMain();
                     }
                 });
@@ -136,6 +142,7 @@ public class LoginActivity extends Activity {
 
     private void showVerifyRegister() {
         indexView = 1;
+        tvTxtVerifyPhoneRegister.setText(tvTxtVerifyPhoneRegister.getText().toString().replace("%d", edtPhoneNumber.getText().toString()));
         layoutVerifyRegister.setVisibility(View.VISIBLE);
         layoutRegister.setVisibility(View.GONE);
 
@@ -151,7 +158,6 @@ public class LoginActivity extends Activity {
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            MyLog.e(MainActivity.class, "onServiceDisconnected");
         }
 
         @Override
@@ -172,7 +178,6 @@ public class LoginActivity extends Activity {
     private void connectMyService() {
         Intent intentMyService = new Intent(this, MyService.class);
         bindService(intentMyService, serviceConnection, Context.BIND_AUTO_CREATE);
-
     }
 
 
@@ -200,7 +205,7 @@ public class LoginActivity extends Activity {
         }
     }
 
-    String verifyCode;
+    String verifyCode = "null";
 
     @OnClick(R.id.tv_next)
     public void onTvNextClicked() {

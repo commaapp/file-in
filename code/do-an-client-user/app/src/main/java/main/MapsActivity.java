@@ -20,6 +20,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import map.CustemMaps;
 import profile.ProfileActivity;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -40,16 +41,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         ButterKnife.bind(this);
+        initMap();
+    }
+
+    private void initMap() {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
+    CustemMaps mCustemMaps;
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        mCustemMaps = new CustemMaps(mMap, this);
+        mCustemMaps.moveToMyLocation();
 
         PlaceAutocompleteFragment autocompleteFragmentFrom =
                 (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.find_location_from);
@@ -104,5 +112,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             case R.id.layout_book:
                 break;
         }
+    }
+
+    @OnClick(R.id.fab_my_location)
+    public void onViewClicked() {
+        mCustemMaps.moveToMyLocation();
     }
 }
