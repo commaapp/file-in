@@ -47,7 +47,7 @@
                 android:layout_weight="1"
                 android:gravity="center|left"
                 android:padding="@dimen/dp5"
-                android:text="@string/bike"
+                android:text="Điểm đi"
                 android:textColor="@color/color_black" />
 
 
@@ -75,7 +75,7 @@
                 android:layout_weight="1"
                 android:gravity="center|left"
                 android:padding="@dimen/dp5"
-                android:text="@string/bike"
+                android:text="Điểm đến"
                 android:textColor="@color/color_black" />
 
 

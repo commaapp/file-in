@@ -18,6 +18,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <activity
             android:name="main.MapsActivity"
             android:label="@string/title_activity_maps" />
@@ -25,12 +26,17 @@
         <activity
             android:name="login.LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
+
+
+        </activity>
+        <activity
+            android:name="main.TemplateActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name="profile.ProfileActivity"

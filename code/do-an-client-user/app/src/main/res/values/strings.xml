@@ -14,7 +14,7 @@
     <string name="cost">giá %d VNĐ</string>
     <string name="car4">Ô-tô 4 chỗ</string>
     <string name="car7">Ô-tô 7 chỗ</string>
-    <string name="finded_driver">Chúng tôi đã tìm thấy một tài xế</string>
+    <string name="finded_driver">Tài xế đã nhận cuốc</string>
     <string name="driver_for">Driver %s</string>
     <string name="for_minute">%d phút</string>
     <string name="for_minute_driver_come">Tài xế sẽ đến đón bạn.</string>

@@ -142,7 +142,7 @@ public class LoginActivity extends Activity {
 
     private void showVerifyRegister() {
         indexView = 1;
-        tvTxtVerifyPhoneRegister.setText(tvTxtVerifyPhoneRegister.getText().toString().replace("%d", edtPhoneNumber.getText().toString()));
+        tvTxtVerifyPhoneRegister.setText(getString(R.string.txt_verify).replace("%d", edtPhoneNumber.getText().toString()));
         layoutVerifyRegister.setVisibility(View.VISIBLE);
         layoutRegister.setVisibility(View.GONE);
 

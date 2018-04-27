@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -12,16 +13,15 @@
         android:layout_marginLeft="@dimen/dp5"
         android:layout_marginRight="@dimen/dp5"
         android:layout_weight="1"
-        android:background="@color/color_white"
         android:elevation="2dp"
         android:gravity="center"
         android:padding="@dimen/dp10"
         android:text="@string/finded_driver"
-        android:textColor="@color/color_black" />
+        android:textColor="@color/color_white" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp128"
+        android:layout_height="@dimen/dp128"
         android:layout_gravity="center"
         android:src="@drawable/img_profile_default" />
 
@@ -33,19 +33,18 @@
         android:layout_marginLeft="@dimen/dp5"
         android:layout_marginRight="@dimen/dp5"
         android:layout_weight="1"
-        android:background="@color/color_white"
         android:elevation="2dp"
         android:gravity="center"
         android:padding="@dimen/dp10"
         android:text="Lê Hồng Dương"
-        android:textColor="@color/color_black" />
+        android:textColor="@color/color_white" />
 
-    <RatingBar
-        style="@style/Widget.AppCompat.RatingBar"
-        android:layout_width="match_parent"
+    <com.willy.ratingbar.ScaleRatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
-        android:numStars="5"
-        android:rating="3" />
+        app:srb_stepSize="0.1" />
 
     <TextView
         style="@style/TextAppearance.AppCompat.Medium"
@@ -55,12 +54,11 @@
         android:layout_marginLeft="@dimen/dp5"
         android:layout_marginRight="@dimen/dp5"
         android:layout_weight="1"
-        android:background="@color/color_white"
         android:elevation="2dp"
         android:gravity="center"
         android:padding="@dimen/dp10"
         android:text="29H7.6377 - Honda - Dream"
-        android:textColor="@color/color_black" />
+        android:textColor="@color/color_white" />
 
     <TextView
         style="@style/TextAppearance.AppCompat.Small"
@@ -70,10 +68,9 @@
         android:layout_marginLeft="@dimen/dp5"
         android:layout_marginRight="@dimen/dp5"
         android:layout_weight="1"
-        android:background="@color/color_white"
         android:elevation="2dp"
         android:gravity="center"
         android:padding="@dimen/dp10"
         android:text="@string/driver_for"
-        android:textColor="@color/color_black" />
+        android:textColor="@color/color_white" />
 </LinearLayout>
