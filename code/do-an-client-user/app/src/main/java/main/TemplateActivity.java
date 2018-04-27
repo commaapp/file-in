@@ -21,7 +21,7 @@ public class TemplateActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_infor_taixe);
+        setContentView(R.layout.activity_done);
     }
 
 

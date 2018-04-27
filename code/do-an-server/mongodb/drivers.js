@@ -26,7 +26,7 @@ module.exports = {
             })
         })
     },
-    findAll: function ( callback) {
+    findAll: function (callback) {
         init(function (db) {
             db.db(nameDatabase).collection(nameCollection).find().toArray(function (err, docs) {
                 callback(docs)
@@ -35,9 +35,43 @@ module.exports = {
     },
     delete: function (json) {
 
-    }
+    },
+    updateLocation: function (data, callback) {
+        init(function (db) {
+            console.log(data.phoneNumber);
+            db.db(nameDatabase).collection(nameCollection).update({phoneNumber: data.phoneNumber}, {
+                $set: {
+                    'lat': data.lat,
+                    'lng': data.lng,
+                    'degree': data.degree,
+                }
+            }, {upsert: true}, callback)
 
+        })
+    },
+    updateState: function (data, callback) {
+        init(function (db) {
+            console.log(data.phoneNumber);
+            db.db(nameDatabase).collection(nameCollection).update({phoneNumber: data.phoneNumber}, {
+                $set: {
+                    'isReady': data.isReady,
+                }
+            }, {upsert: true}, callback)
 
+        })
+    },
+    updateStar: function (data, callback) {
+        init(function (db) {
+            console.log(data.phoneNumber);
+            db.db(nameDatabase).collection(nameCollection).update({phoneNumber: data.phoneNumber}, {
+                $set: {
+                    'ReviewNumber': 10,
+                    'StarNumber': 11
+                }
+            }, {upsert: true}, callback)
+
+        })
+    },
 
 
 }

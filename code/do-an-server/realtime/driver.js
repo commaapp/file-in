@@ -11,7 +11,6 @@ module.exports = function (socket) {
     socket.on('Driper_Vefify_Phonenumber', function (data) {
         console.log(data);
         setTimeout(function () {
-            // tạo mã xác nhận và gửi lại usẻ để xác nhận lại điện thoại
             verifyCode = Math.floor(1000 + Math.random() * 9000);
             socket.emit('Driper_Vefify_Code_Res', verifyCode);
         }, 3000);
@@ -32,10 +31,41 @@ module.exports = function (socket) {
             socket.emit('getDriverProfile_Res', jsonDriver);
         })
     })
+    socket.on('Driver_Update_Location', function (data) {
+        data = JSON.parse(data)
+        console.log(data);
 
+        drivers.updateLocation(data, function () {
+            drivers.findOne(data.phoneNumber, function (jsonDriver) {
+                // console.log('updateLocation');
+                console.log(jsonDriver);
+                // console.log(jsonDriver.log);
+            })
+        })
+    })
 
-
-
+    socket.on('Driver_Update_State', function (data) {
+        data = JSON.parse(data)
+        console.log('updateDriverState');
+        console.log(data);
+        drivers.updateState(data, function () {
+            drivers.findOne(data.phoneNumber, function (jsonDriver) {
+                console.log('updateDriverState');
+                console.log(jsonDriver);
+            })
+        })
+    })
+    socket.on('Driver_Update_Star', function (data) {
+        data = JSON.parse(data)
+        console.log(data);
+        console.log('Driver_Update_Star');
+        drivers.updateStar(data, function () {
+            drivers.findOne(data.phoneNumber, function (jsonDriver) {
+                console.log('Driver_Update_Star');
+                console.log(jsonDriver);
+            })
+        })
+    })
 
 
 }
