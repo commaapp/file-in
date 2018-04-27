@@ -188,9 +188,10 @@ public class CustemMaps implements GoogleMap.OnMyLocationChangeListener {
         checkLocationIsEnable();
         if (myLocation != null) {
             LatLng latLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-            mapMoveTo(latLng, 13);
+            mapMoveTo(latLng, 14);
 
         }
+
     }
 
     public void mapMoveTo(LatLng latLng, int i) {

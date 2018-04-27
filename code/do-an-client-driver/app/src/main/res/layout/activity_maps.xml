@@ -11,9 +11,9 @@
         android:padding="@dimen/dp10">
 
         <ImageView
+            android:id="@+id/view_profile"
             android:layout_width="@dimen/dp36"
             android:layout_height="@dimen/dp36"
-            android:id="@+id/view_profile"
             android:layout_gravity="center"
             android:src="@drawable/ic_person" />
 
@@ -45,23 +45,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_matdo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_margin="@dimen/dp20"
-            android:src="@drawable/ic_location"
-            app:backgroundTint="@color/color_white" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/fab_matdo"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp20"
+            android:layout_margin="@dimen/dp20"
             android:src="@drawable/ic_my_location"
             app:backgroundTint="@color/color_white" />
     </RelativeLayout>

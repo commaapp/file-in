@@ -5,7 +5,8 @@ package app;
  */
 
 public class Config {
-    public static final String SERVER_URL = "http://192.168.1.109/";
+//    public static final String SERVER_URL = "https://driper.herokuapp.com/";
+    public static final String SERVER_URL = "http://192.168.1.109:81/";
     public static final String ACCOUNT_LOGIN = "ACCOUNT_CUSTOMER_LOGIN";
     public static final String MY_CACHE = "MY_CACHE";
     public static final String ACCOUNT_PHONE_NUMBER = "ACCOUNT_CUSTOMER_PHONE_NUMBER";

@@ -17,6 +17,54 @@ public class Driver {
     String imBaoHiem2;
     String rateNumber1;
     String rateStar;
+    double lat;
+    double lng;
+    boolean isReady;
+    float degree;
+
+    public float getDegree() {
+        return degree;
+    }
+
+    public void setDegree(float degree) {
+        this.degree = degree;
+    }
+
+    public boolean isReady() {
+        return isReady;
+    }
+
+    public void setReady(boolean ready) {
+        isReady = ready;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public Driver(String phoneNumber, boolean isReady) {
+        this.phoneNumber = phoneNumber;
+        this.isReady = isReady;
+    }
+
+    public Driver(String phoneNumber, double lat, double log, float degree) {
+        this.phoneNumber = phoneNumber;
+        this.lat = lat;
+        this.lng = log;
+        this.degree = degree;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLog() {
+        return lng;
+    }
+
+    public void setLog(double log) {
+        this.lng = log;
+    }
 
     public String getInforXe() {
         return inforXe;
