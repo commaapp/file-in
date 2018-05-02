@@ -5,7 +5,7 @@ package app;
  */
 
 public class Config {
-//    public static final String SERVER_URL = "https://driper.herokuapp.com/";
+    //    public static final String SERVER_URL = "https://driper.herokuapp.com/";
     public static final String SERVER_URL = "http://192.168.1.109:81/";
     public static final String ACCOUNT_LOGIN = "ACCOUNT_CUSTOMER_LOGIN";
     public static final String MY_CACHE = "MY_CACHE";
@@ -14,9 +14,7 @@ public class Config {
     public static final String EMIT_REQUEST_LOGIN = "EMIT_CUSTOMER_REQUEST_LOGIN";
     public static final String ON_REQUEST_LOGIN = "ON_CUSTOMER_REQUEST_LOGIN";
 
-
     public static final String CLIENT_CUSTEMER_CONNECT = "CLIENT_CUSTOMER_CONNECT_SUCCES";
-
 
     public static final String Vefify_Phonenumber = "Vefify_Phonenumber";
     public static String Vefify_Code_Res = "Vefify_Code_Res";
@@ -24,8 +22,12 @@ public class Config {
     public static String Custemer_Login_Res = "Custemer_Login_Res";
     public static String Custemer_Check_Login = "Custemer_Check_Login";
     public static String Custemer_Check_Login_Res = "Custemer_Check_Login_Res";
-    public static String Custemer_View_Profile="Custemer_View_Profile";
-    public static String Custemer_View_Profile_Res="Custemer_View_Profile_Res";
-    public static String Custemer_Update_Profile_Res="Custemer_Update_Profile_Res";
-    public static String Custemer_Update_Profile="Custemer_Update_Profile";
+    public static String Custemer_View_Profile = "Custemer_View_Profile";
+    public static String Custemer_View_Profile_Res = "Custemer_View_Profile_Res";
+    public static String Custemer_Update_Profile_Res = "Custemer_Update_Profile_Res";
+    public static String Custemer_Update_Profile = "Custemer_Update_Profile";
+    public static String updateStateOnlineProfile = "updateStateOnlineProfile";
+    public static String updateCustomLocation = "updateCustomLocation";
+    public static String findDriperInLocation_res = "findDriperInLocation_res";
+    public static String findDriperInLocation = "findDriperInLocation";
 }

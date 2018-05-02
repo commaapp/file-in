@@ -40,11 +40,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         ButterKnife.bind(this);
-
-
+        swReady.setChecked(MyService.IS_RUNGNING);
         connectMyService();
-
-
     }
 
     private MyService mMyService;
@@ -88,7 +85,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onDestroy() {
         unbindService(serviceConnection);
         if (swReady.isChecked()) mMyService.runForeground();
-//        else mMyService.stopSelf();
+        else mMyService.stopSelf();
         super.onDestroy();
     }
 

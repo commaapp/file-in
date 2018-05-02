@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
             mMyService = binder.getMyService();
             isBound = true;
             MyLog.e(MainActivity.class, "onServiceConnected");
-
             mMyService.getSocket().connect();
             mMyService.getSocket().emit("my other event","day la android");
         }

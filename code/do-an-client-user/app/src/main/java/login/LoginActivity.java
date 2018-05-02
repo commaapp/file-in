@@ -93,7 +93,7 @@ public class LoginActivity extends Activity {
                         @Override
                         public void run() {
                             try {
-                                MyLog.e(getClass(), args[0].toString());
+                                MyLog.e(getClass(), "checkLogin " + args[0].toString());
                                 Customer customer = new Gson().fromJson(args[0].toString(), Customer.class);
                                 login(customer.getSdt(), customer.getName());
                             } catch (NullPointerException e) {
@@ -164,7 +164,6 @@ public class LoginActivity extends Activity {
         public void onServiceConnected(ComponentName name, IBinder service) {
             MyService.MyBinder binder = (MyService.MyBinder) service;
             mMyService = binder.getMyService();
-            MyLog.e(getClass(), "onServiceConnected");
             LoginActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

@@ -18,6 +18,7 @@ import app.Config;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
+import myutil.MyCache;
 import myutil.MyLog;
 import obj.Customer;
 
@@ -76,9 +77,10 @@ public class MyService extends Service {
         mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
         mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
         mSocket.on(Config.CLIENT_CUSTEMER_CONNECT, CLIENT_CUSTEMER_CONNECT);
-
-
         mSocket.connect();
+        updateStateOnlineProfile(new Customer(
+                MyCache.getStringValueByName(MyService.this, Config.MY_CACHE, Config.ACCOUNT_PHONE_NUMBER)
+                , true));
         return START_NOT_STICKY;
     }
 
@@ -98,6 +100,8 @@ public class MyService extends Service {
     @Override
     public void onCreate() {
         Log.e("ServiceDemo", "Đã gọi onCreate()");
+
+
         binder = new MyBinder();
         super.onCreate();
     }
@@ -112,6 +116,7 @@ public class MyService extends Service {
     @Override
     public boolean onUnbind(Intent intent) {
         Log.e("ServiceDemo", "Đã gọi onUnbind()");
+
         return super.onUnbind(intent);
     }
 
@@ -150,6 +155,21 @@ public class MyService extends Service {
     public void updateCustomProfile(Customer customer, Emitter.Listener listener) {
         mSocket.on(Config.Custemer_Update_Profile_Res, listener);
         mSocket.emit(Config.Custemer_Update_Profile, customer.toJSON());
+    }
+
+    public void updateStateOnlineProfile(Customer customer) {
+        MyLog.e(getClass(), "updateStateOnlineProfile " + customer.toJSON());
+        mSocket.emit(Config.updateStateOnlineProfile, customer.toJSON());
+
+    }
+
+    public void updateCustomLocation(Customer customer) {
+        mSocket.emit(Config.updateCustomLocation, customer.toJSON());
+    }
+
+    public void findDriperInLocation(Customer customer,Emitter.Listener listener) {
+        mSocket.on(Config.findDriperInLocation_res, listener);
+        mSocket.emit(Config.findDriperInLocation, customer.toJSON());
     }
 
 

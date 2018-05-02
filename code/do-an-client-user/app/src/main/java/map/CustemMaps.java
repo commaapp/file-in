@@ -38,6 +38,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -72,6 +74,35 @@ public class CustemMaps implements GoogleMap.OnMyLocationChangeListener {
         googleMap.getUiSettings().setCompassEnabled(true);
 
 
+    }
+
+    public double calculationByDistance(LatLng StartP, LatLng EndP) {
+        int Radius = 6371;// radius of earth in Km
+        double lat1 = StartP.latitude;
+        double lat2 = EndP.latitude;
+        double lon1 = StartP.longitude;
+        double lon2 = EndP.longitude;
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+                + Math.cos(Math.toRadians(lat1))
+                * Math.cos(Math.toRadians(lat2)) * Math.sin(dLon / 2)
+                * Math.sin(dLon / 2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+        double valueResult = Radius * c;
+        double km = valueResult / 1;
+        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.GERMAN);
+        otherSymbols.setDecimalSeparator('.');
+        otherSymbols.setGroupingSeparator(',');
+        DecimalFormat newFormat = new DecimalFormat(".##", otherSymbols);
+        double kmInDec = Double.parseDouble(newFormat.format(km));
+        Log.e("Radius Value", newFormat.format(km));
+        Log.e("Radius Value", "" + valueResult + "   KM  " + kmInDec);
+        return kmInDec;
+    }
+
+    public interface OnMyLocationInit {
+        public void onMyLocationInit(Location location);
     }
 
     public CustemMaps(Context context) {
@@ -148,9 +179,8 @@ public class CustemMaps implements GoogleMap.OnMyLocationChangeListener {
         markerOptions.title(title);
         markerOptions.snippet(snippet);
         Marker marker = googleMap.addMarker(markerOptions);
-        marker.setFlat(true);
-        marker.setRotation(45);
         marker.setAnchor(0.5f, 0.5f);
+        marker.setFlat(true);
         return marker;
     }
 
@@ -188,8 +218,8 @@ public class CustemMaps implements GoogleMap.OnMyLocationChangeListener {
         checkLocationIsEnable();
         if (myLocation != null) {
             LatLng latLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-            mapMoveTo(latLng, 13);
-
+            mapMoveTo(latLng, 17);
+            setMyLocation(myLocation);
         }
     }
 

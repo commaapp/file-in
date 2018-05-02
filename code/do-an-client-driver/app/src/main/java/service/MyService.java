@@ -46,6 +46,7 @@ import wellcome.WellcomeActivity;
  */
 
 public class MyService extends Service implements SensorEventListener {
+    public static boolean IS_RUNGNING = false;
     private Socket mSocket;
     private CustemMaps mCustemMaps;
     private LocationManager mLocationManager;
@@ -94,7 +95,7 @@ public class MyService extends Service implements SensorEventListener {
     private final LocationListener mLocationListener = new LocationListener() {
         @Override
         public void onLocationChanged(final Location location) {
-            Log.e("ServiceDemo", "onMyLocationChange");
+            MyLog.e(getClass(), "onLocationChanged");
             mSocket.emit(Config.Driver_Update_Location,
                     new Driver(
                             MyCache.getStringValueByName(MyService.this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER),
@@ -163,6 +164,7 @@ public class MyService extends Service implements SensorEventListener {
     }
 
     public void runForeground() {
+        IS_RUNGNING = true;
         Intent nextIntent = new Intent(this, WellcomeActivity.class);
         nextIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
