@@ -44,6 +44,24 @@ public class Book implements Serializable {
     String nameFrom;
     String nameTo;
     int cost;
+    Driver driver;
+    Customer customer;
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     public String getPhoneDriver() {
         return phoneDriver;

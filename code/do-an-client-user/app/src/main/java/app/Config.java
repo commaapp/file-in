@@ -22,6 +22,7 @@ public class Config {
     public static final String Vefify_Phonenumber = "Vefify_Phonenumber";
     public static final int RESULT_CODE_TAI_XE = 1070;
     public static final String BOOK_KEY = "BOOK_KEY";
+    public static final String NEW_OK_BOOK = "NEW_OK_BOOK";
     public static String Vefify_Code_Res = "Vefify_Code_Res";
     public static String Custemer_Login = "Custemer_Login";
     public static String Custemer_Login_Res = "Custemer_Login_Res";
@@ -37,6 +38,7 @@ public class Config {
     public static String findDriperInLocation = "findDriperInLocation";
     public static String bookFindDriver_res = "bookFindDriver_res";
     public static String bookFindDriver = "bookFindDriver";
+    public static final String NOTIFY = "notify";
 
     public static String formatNumber(int number) {
         if (number < 1000) {

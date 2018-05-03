@@ -39,6 +39,7 @@ import map.CustemMaps;
 import myutil.MyCache;
 import myutil.MyLog;
 import newbook.NewBookActivity;
+import nhancuoc.NhanCuocActivity;
 import obj.Book;
 import obj.Driver;
 import wellcome.WellcomeActivity;
@@ -58,6 +59,17 @@ public class MyService extends Service implements SensorEventListener {
         @Override
         public void call(Object... args) {
             MyLog.e(getClass(), args[0].toString());
+        }
+    };
+    private Emitter.Listener onNewOkBook = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            Book book = Book.fromJSON(args[0].toString());
+            Intent intent = new Intent(MyService.this, NhanCuocActivity.class);
+            intent.putExtra(Config.NEW_BOOK, args[0].toString());
+            updateDriverState(false);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
     };
 
@@ -145,6 +157,7 @@ public class MyService extends Service implements SensorEventListener {
         mSocket.on(Config.CLIENT_CUSTEMER_CONNECT, CLIENT_CUSTEMER_CONNECT);
         mSocket.on(Config.NOTIFY, onNotify);
         mSocket.on(Config.NEW_BOOK, onNewBook);
+        mSocket.on(Config.NEW_OK_BOOK, onNewOkBook);
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_GAME);
@@ -157,7 +170,6 @@ public class MyService extends Service implements SensorEventListener {
         @Override
         public void call(Object... args) {
             Book book = Book.fromJSON(args[0].toString());
-            MyLog.e(getClass(), "onNewBook" + args[0].toString());
             if (book.getPhoneDriver().equals(MyCache.getStringValueByName(MyService.this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER))) {
                 Intent intent = new Intent(MyService.this, NewBookActivity.class);
                 intent.putExtra(Config.NEW_BOOK, book);
@@ -326,6 +338,10 @@ public class MyService extends Service implements SensorEventListener {
     public void tuChoiCuoc() {
         updateDriverState(true);
         mSocket.emit(Config.tuChoiCuoc, MyCache.getStringValueByName(this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER));
+    }
+
+    public void chapNhanCuoc() {
+        mSocket.emit(Config.chapNhanCuoc, MyCache.getStringValueByName(this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER));
     }
 
     public class MyBinder extends Binder {

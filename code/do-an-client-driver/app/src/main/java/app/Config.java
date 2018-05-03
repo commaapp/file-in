@@ -10,7 +10,7 @@ import java.text.NumberFormat;
 public class Config {
     //    public static final String SERVER_URL = "https://driper.herokuapp.com/";
     public static final String SERVER_URL = "http://192.168.1.109:81/";
-
+    public static final String NEW_OK_BOOK = "NEW_OK_BOOK_DRIVER";
     public static final String NEW_BOOK = "NEW_BOOK";
     public static final String ACCOUNT_LOGIN = "ACCOUNT_CUSTOMER_LOGIN";
     public static final String MY_CACHE = "MY_CACHE";
@@ -45,6 +45,7 @@ public class Config {
     public static String getCustomerOnline = "getCustomerOnline";
     public static String huyCuoc = "huyCuoc";
     public static String tuChoiCuoc = "tuChoiCuoc";
+    public static String chapNhanCuoc = "chapNhanCuoc";
 
     public static String formatNumber(int number) {
         if (number < 1000) {

@@ -29,7 +29,11 @@ import obj.Customer;
 
 public class MyService extends Service {
     private Socket mSocket;
-
+    private Emitter.Listener onNewOkBook = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+        }
+    };
 
     {
         try {
@@ -70,6 +74,12 @@ public class MyService extends Service {
             MyLog.e(getClass(), "onConnectError ");
         }
     };
+    private Emitter.Listener onNotify = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            MyLog.e(getClass(), args[0].toString());
+        }
+    };
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -79,7 +89,8 @@ public class MyService extends Service {
         mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
         mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
         mSocket.on(Config.CLIENT_CUSTEMER_CONNECT, CLIENT_CUSTEMER_CONNECT);
-
+        mSocket.on(Config.NOTIFY, onNotify);
+        mSocket.on(Config.NEW_OK_BOOK, onNewOkBook);
         mSocket.connect();
         return START_NOT_STICKY;
     }

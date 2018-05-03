@@ -53,12 +53,11 @@ public class NewBookActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        mMyService.tuChoiCuoc();
+
         unbindService(serviceConnection);
         super.onDestroy();
     }
 
-    String verifyCode = "null";
 
     private void connectMyService() {
         Intent intentMyService = new Intent(this, MyService.class);
@@ -99,7 +98,8 @@ public class NewBookActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-               finish();
+                mMyService.tuChoiCuoc();
+                finish();
             }
 
         }.start();
@@ -112,12 +112,18 @@ public class NewBookActivity extends AppCompatActivity {
     @OnClick(R.id.tv_chap_nhan)
     public void onTvChapNhanClicked() {
         mCountDownTimer.cancel();
+        mMyService.chapNhanCuoc();
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
     @OnClick(R.id.tv_huy)
     public void onTvHuyClicked() {
-       finish();
-
+        mMyService.tuChoiCuoc();
+        finish();
     }
 
 }
