@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.Config;
+import book.BookActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -39,6 +40,7 @@ import io.socket.emitter.Emitter;
 import map.CustemMaps;
 import myutil.MyCache;
 import myutil.MyLog;
+import obj.Book;
 import obj.Customer;
 import obj.Driver;
 import profile.ProfileActivity;
@@ -61,6 +63,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker mMarkerTo;
     private ArrayList<Driver> mDrivers;
     private ArrayList<Marker> mDriverMarker = new ArrayList<>();
+    private int cost;
+    private double distance;
 
     private void connectMyService() {
         Intent intentMyService = new Intent(this, MyService.class);
@@ -87,6 +91,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
     };
+
 
     @Override
     protected void onDestroy() {
@@ -164,8 +169,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
-        mPlaceAutocompleteFragmentTo.setHint("Bạn muốn đi đến đâu?");
-        ImageView searchIconFrom = (ImageView) ((LinearLayout) mPlaceAutocompleteFragmentTo.getView()).getChildAt(0);
+        mPlaceAutocompleteFragmentTo.setHint("Bạn muốn đến đâu?");
+        ImageView searchIconFrom = (ImageView) ((LinearLayout) mPlaceAutocompleteFragmentFrom.getView()).getChildAt(0);
         ImageView searchIconTo = (ImageView) ((LinearLayout) mPlaceAutocompleteFragmentTo.getView()).getChildAt(0);
         searchIconFrom.setImageDrawable(getResources().getDrawable(R.drawable.ic_dot));
         searchIconTo.setImageDrawable(getResources().getDrawable(R.drawable.ic_location));
@@ -209,9 +214,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void checkShowItemBook() {
         if (mLatLngFrom != null && mLatLngTo != null) {
             layoutItemBook.setVisibility(View.VISIBLE);
-            double distance = mCustemMaps.calculationByDistance(mLatLngFrom, mLatLngTo);
-            int cost = (int) (distance * 6000);
-            tvCost.setText(getString(R.string.cost).replace("%d", "" + cost));
+            distance = mCustemMaps.calculationByDistance(mLatLngFrom, mLatLngTo);
+            cost = (int) (distance * 6000);
+            tvCost.setText(getString(R.string.cost).replace("%d", "" + Config.formatNumber(cost)));
             MyLog.e(getClass(), mLatLngFrom.latitude + " " + mLatLngFrom.longitude);
             MyLog.e(getClass(), mLatLngTo.latitude + " " + mLatLngTo.longitude);
 
@@ -268,11 +273,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mCustemMaps.moveToMyLocation();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == Config.RESULT_CODE_TAI_XE) {
+            MyLog.e(getClass(), "RESULT_OK");
+            Snackbar.make(layoutBook, "Tìm thấy một tài xế", Snackbar.LENGTH_SHORT).show();
+        }
+        if (resultCode == RESULT_CANCELED && requestCode == Config.RESULT_CODE_TAI_XE) {
+            Snackbar.make(layoutBook, "Không tìm thấy tài xế nào. Vui lòng thử lại sau ít phút!", Snackbar.LENGTH_SHORT).show();
+            MyLog.e(getClass(), "RESULT_CANCELED");
+        }
+    }
 
     @OnClick(R.id.tv_book)
     public void onBookClicked() {
         if (mLatLngFrom != null && mLatLngTo != null) {
-
+            Intent intent = new Intent(this, BookActivity.class);
+            intent.putExtra(Config.BOOK_KEY, new Book(
+                    MyCache.getStringValueByName(MapsActivity.this, Config.MY_CACHE, Config.ACCOUNT_PHONE_NUMBER),
+                    mLatLngFrom.latitude,
+                    mLatLngTo.latitude,
+                    mLatLngFrom.longitude,
+                    mLatLngTo.longitude,
+                    mCustemMaps.getNameByLocation(mLatLngFrom.latitude, mLatLngFrom.longitude),
+                    mCustemMaps.getNameByLocation(mLatLngTo.latitude, mLatLngTo.longitude),
+                    cost,
+                    distance
+            ));
+            startActivityForResult(intent, Config.RESULT_CODE_TAI_XE);
         } else
             Snackbar.make(layoutBook, "Bạn cần lựa chọn điểm đi và điểm đến trước khi đặt xe!", Snackbar.LENGTH_SHORT).show();
     }

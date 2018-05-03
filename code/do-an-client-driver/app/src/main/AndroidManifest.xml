@@ -43,6 +43,11 @@
             android:name="map.ActivityDemo"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <activity
+            android:name="newbook.NewBookActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        </activity>
+        <activity
             android:name="wellcome.WellcomeActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>

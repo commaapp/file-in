@@ -6,10 +6,23 @@
     android:orientation="vertical"
     android:padding="@dimen/dp10">
 
-    <ProgressBar
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:gravity="center"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_loc_white" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </LinearLayout>
 
     <TextView
         style="@style/TextAppearance.AppCompat.Title"
@@ -40,6 +53,7 @@
                 android:src="@drawable/ic_dot" />
 
             <TextView
+                android:id="@+id/tvNameFrom"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,6 +82,7 @@
                 android:src="@drawable/ic_location" />
 
             <TextView
+                android:id="@+id/tvNameTo"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,6 +104,7 @@
             android:background="@color/color_grey" />
 
         <TextView
+            android:id="@+id/tvCost"
             style="@style/TextAppearance.AppCompat.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,6 +116,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tvCancel"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

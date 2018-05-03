@@ -38,6 +38,8 @@ import io.socket.emitter.Emitter;
 import map.CustemMaps;
 import myutil.MyCache;
 import myutil.MyLog;
+import newbook.NewBookActivity;
+import obj.Book;
 import obj.Driver;
 import wellcome.WellcomeActivity;
 
@@ -52,6 +54,12 @@ public class MyService extends Service implements SensorEventListener {
     private LocationManager mLocationManager;
     private HeatmapTileProvider mProvider;
     private TileOverlay mOverlay;
+    private Emitter.Listener onNotify = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            MyLog.e(getClass(), args[0].toString());
+        }
+    };
 
     {
         try {
@@ -135,6 +143,8 @@ public class MyService extends Service implements SensorEventListener {
         mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
         mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
         mSocket.on(Config.CLIENT_CUSTEMER_CONNECT, CLIENT_CUSTEMER_CONNECT);
+        mSocket.on(Config.NOTIFY, onNotify);
+        mSocket.on(Config.NEW_BOOK, onNewBook);
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_GAME);
@@ -142,6 +152,21 @@ public class MyService extends Service implements SensorEventListener {
         getCurrentLocation();
         return START_NOT_STICKY;
     }
+
+    private Emitter.Listener onNewBook = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            Book book = Book.fromJSON(args[0].toString());
+            MyLog.e(getClass(), "onNewBook" + args[0].toString());
+            if (book.getPhoneDriver().equals(MyCache.getStringValueByName(MyService.this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER))) {
+                Intent intent = new Intent(MyService.this, NewBookActivity.class);
+                intent.putExtra(Config.NEW_BOOK, book);
+                updateDriverState(false);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        }
+    };
 
     /*
     phải có cả NETWORK_PROVIDER và GPS_PROVIDER mới chạy dc
@@ -267,7 +292,10 @@ public class MyService extends Service implements SensorEventListener {
     private SensorManager mSensorManager;
 
     public void updateDriverState(boolean b) {
-        String json = new Driver(MyCache.getStringValueByName(this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER), b).toJSON();
+        IS_RUNGNING = b;
+        String json = new Driver(
+                MyCache.getStringValueByName(this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER)
+                , b).toJSON();
         mSocket.emit(Config.Driver_Update_State, json);
         Log.e("ServiceDemo", "updateDriverState " + json);
     }
@@ -284,6 +312,20 @@ public class MyService extends Service implements SensorEventListener {
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
+    }
+
+    public void getCustomerOnline(Emitter.Listener listener) {
+        mSocket.on(Config.getCustomerOnline_Res, listener);
+        mSocket.emit(Config.getCustomerOnline, MyCache.getStringValueByName(this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER));
+    }
+
+    public void huyCuoc() {
+
+    }
+
+    public void tuChoiCuoc() {
+        updateDriverState(true);
+        mSocket.emit(Config.tuChoiCuoc, MyCache.getStringValueByName(this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER));
     }
 
     public class MyBinder extends Binder {

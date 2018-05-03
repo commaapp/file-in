@@ -1,10 +1,9 @@
 var customers = require("../mongodb/customers")
-
+var drivers = require("../mongodb/drivers")
 module.exports = function (socket) {
 
     //trước khi custemer đăng nhập gồm sdt + tên  thì gửi sdt lên hệ thông để xác nhận số điện thoại
     socket.on('Vefify_Phonenumber', function (data) {
-        console.log(data);
         setTimeout(function () {
             // tạo mã xác nhận và gửi lại usẻ để xác nhận lại điện thoại
             verifyCode = Math.floor(1000 + Math.random() * 9000);
@@ -15,11 +14,8 @@ module.exports = function (socket) {
     // đnăg nhập gồm tên + sdt
     socket.on('Custemer_Login', function (data) {
         data = JSON.parse(data)
-        console.log(data);
         customers.insertAndUpdate({sdt: data.sdt}, data, function (err, count, res) {
             if (err) throw err;
-            console.log(count);
-            console.log(res);
         });
         socket.emit('Custemer_Login_Res', "");
     })
@@ -27,9 +23,7 @@ module.exports = function (socket) {
     // lưu dữ liệu ng dùng trong máy và khi vào lại app tự động đnăg nhập
     // check xem acc luu trong máy dã có trến server chưa
     socket.on('Custemer_Check_Login', function (data) {
-        console.log('Custemer_Check_Login ' + data);
         customers.findIsExists(data, function (acc) {
-            console.log(acc);
             socket.emit('Custemer_Check_Login_Res', acc);
         })
     })
@@ -42,6 +36,25 @@ module.exports = function (socket) {
         data = JSON.parse(data);
         customers.updateNameCustom({sdt: data.sdt}, {$set: {name: data.name}}, function () {
             socket.emit('Custemer_Update_Profile_Res', "");
+        })
+    })
+    socket.on('updateStateOnlineProfile', function (data) {
+        data = JSON.parse(data);
+        console.log('----------------------------- update State Online Profile')
+        console.log(data)
+        customers.updateStateOnlineProfile({sdt: data.sdt}, {$set: {isOnline: data.isOnline}}, function () {
+        })
+    })
+    socket.on('updateCustomLocation', function (data) {
+        data = JSON.parse(data)
+        customers.updateLocation(data, function () {
+
+        })
+    })
+    socket.on('findDriperInLocation', function (data) {
+        data = JSON.parse(data)
+        drivers.findReadyInLocation({isReady: true}, function (array) {
+            socket.emit('findDriperInLocation_res', array);
         })
     })
 }

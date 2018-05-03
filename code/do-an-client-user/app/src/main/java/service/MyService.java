@@ -20,6 +20,7 @@ import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import myutil.MyCache;
 import myutil.MyLog;
+import obj.Book;
 import obj.Customer;
 
 /**
@@ -28,6 +29,7 @@ import obj.Customer;
 
 public class MyService extends Service {
     private Socket mSocket;
+
 
     {
         try {
@@ -77,10 +79,8 @@ public class MyService extends Service {
         mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
         mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
         mSocket.on(Config.CLIENT_CUSTEMER_CONNECT, CLIENT_CUSTEMER_CONNECT);
+
         mSocket.connect();
-        updateStateOnlineProfile(new Customer(
-                MyCache.getStringValueByName(MyService.this, Config.MY_CACHE, Config.ACCOUNT_PHONE_NUMBER)
-                , true));
         return START_NOT_STICKY;
     }
 
@@ -167,9 +167,14 @@ public class MyService extends Service {
         mSocket.emit(Config.updateCustomLocation, customer.toJSON());
     }
 
-    public void findDriperInLocation(Customer customer,Emitter.Listener listener) {
+    public void findDriperInLocation(Customer customer, Emitter.Listener listener) {
         mSocket.on(Config.findDriperInLocation_res, listener);
         mSocket.emit(Config.findDriperInLocation, customer.toJSON());
+    }
+
+    public void bookFindDriver(Book book, Emitter.Listener listener) {
+        mSocket.on(Config.bookFindDriver_res, listener);
+        mSocket.emit(Config.bookFindDriver, book.toJSON());
     }
 
 

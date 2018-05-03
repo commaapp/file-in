@@ -133,6 +133,9 @@ public class LoginActivity extends Activity {
     }
 
     private void startMain() {
+        mMyService.updateStateOnlineProfile(new Customer(
+                MyCache.getStringValueByName(this, Config.MY_CACHE, Config.ACCOUNT_PHONE_NUMBER)
+                , true));
         Intent intent = new Intent(this, MapsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
