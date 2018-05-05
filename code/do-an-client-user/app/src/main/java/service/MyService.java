@@ -22,6 +22,7 @@ import myutil.MyCache;
 import myutil.MyLog;
 import obj.Book;
 import obj.Customer;
+import obj.Driver;
 
 /**
  * Created by D on 4/13/2018.
@@ -34,7 +35,7 @@ public class MyService extends Service {
         public void call(Object... args) {
         }
     };
-    private Emitter.Listener onNewOkBookCustomer=new Emitter.Listener() {
+    private Emitter.Listener onNewOkBookCustomer = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
 
@@ -176,7 +177,6 @@ public class MyService extends Service {
     }
 
     public void updateStateOnlineProfile(Customer customer) {
-        MyLog.e(getClass(), "updateStateOnlineProfile " + customer.toJSON());
         mSocket.emit(Config.updateStateOnlineProfile, customer.toJSON());
 
     }
@@ -193,6 +193,14 @@ public class MyService extends Service {
     public void bookFindDriver(Book book, Emitter.Listener listener) {
         mSocket.on(Config.bookFindDriver_res, listener);
         mSocket.emit(Config.bookFindDriver, book.toJSON());
+    }
+
+    public void huyCuocXe() {
+        mSocket.emit(Config.huyCuocXe, MyCache.getStringValueByName(this, Config.MY_CACHE, Config.ACCOUNT_PHONE_NUMBER));
+    }
+
+    public void updateStarDriver(Driver driver) {
+        mSocket.emit(Config.updateStarDriver, driver.toJSON());
     }
 
 

@@ -17,15 +17,20 @@
         android:gravity="center"
         android:padding="@dimen/dp10"
         android:text="@string/finded_driver"
-        android:textColor="@color/color_white" />
+        android:textColor="@color/color_black" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
         android:layout_width="@dimen/dp128"
         android:layout_height="@dimen/dp128"
         android:layout_gravity="center"
-        android:src="@drawable/img_profile_default" />
+        android:padding="@dimen/dp5"
+        android:src="@drawable/img_profile_default"
+        app:civ_border_color="#ffffff"
+        app:civ_border_width="2dp" />
 
     <TextView
+        android:id="@+id/tv_name_driver"
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,16 +42,17 @@
         android:gravity="center"
         android:padding="@dimen/dp10"
         android:text="Lê Hồng Dương"
-        android:textColor="@color/color_white" />
+        android:textColor="@color/color_black" />
 
     <com.willy.ratingbar.ScaleRatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/ratingBarDriver"
         android:layout_width="wrap_content"
-        android:layout_gravity="center"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         app:srb_stepSize="0.1" />
 
     <TextView
+        android:id="@+id/tv_infor_xe"
         style="@style/TextAppearance.AppCompat.Medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,19 +64,5 @@
         android:gravity="center"
         android:padding="@dimen/dp10"
         android:text="29H7.6377 - Honda - Dream"
-        android:textColor="@color/color_white" />
-
-    <TextView
-        style="@style/TextAppearance.AppCompat.Small"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/dp5"
-        android:layout_marginRight="@dimen/dp5"
-        android:layout_weight="1"
-        android:elevation="2dp"
-        android:gravity="center"
-        android:padding="@dimen/dp10"
-        android:text="@string/driver_for"
-        android:textColor="@color/color_white" />
+        android:textColor="@color/color_black" />
 </LinearLayout>

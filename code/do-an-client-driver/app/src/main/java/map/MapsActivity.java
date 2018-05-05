@@ -151,6 +151,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     }
+
     private ArrayList<LatLng> readItems() throws JSONException {
         ArrayList<LatLng> list = new ArrayList<LatLng>();
         String json = "[" +
@@ -175,12 +176,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         return list;
     }
-    private void setMatDo() {
-        try {
-            mLatLngMatDos.addAll(readItems());
-        } catch (JSONException e) {
 
-        }
+    private void setMatDo() {
+//        try {
+//            mLatLngMatDos.addAll(readItems());
+//        } catch (JSONException e) {
+//
+//        }
         mProvider = new HeatmapTileProvider.Builder()
                 .data(mLatLngMatDos)
                 .build();

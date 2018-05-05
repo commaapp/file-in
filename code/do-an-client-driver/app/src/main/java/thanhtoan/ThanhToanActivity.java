@@ -44,6 +44,7 @@ public class ThanhToanActivity extends AppCompatActivity {
 
     @OnClick(R.id.tv_done)
     public void onViewClicked() {
-
+        setResult(RESULT_OK);
+        finish();
     }
 }

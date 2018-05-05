@@ -25,6 +25,8 @@ public class Config {
     public static final String NEW_OK_BOOK = "NEW_OK_BOOK";
     public static final String NEW_OK_BOOK_CUSTOMER = "NEW_OK_BOOK_CUSTOMER";
     public static final String BOOK_CHAP_NHAN = "BOOK_CHAP_NHAN";
+    public static final String HUY_CUOC = "HUY_CUOC";
+    public static final String DONE_INTENT = "DONE_INTENT";
     public static String Vefify_Code_Res = "Vefify_Code_Res";
     public static String Custemer_Login = "Custemer_Login";
     public static String Custemer_Login_Res = "Custemer_Login_Res";
@@ -41,6 +43,9 @@ public class Config {
     public static String bookFindDriver_res = "bookFindDriver_res";
     public static String bookFindDriver = "bookFindDriver";
     public static final String NOTIFY = "notify";
+    public static String huyCuocXe = "huyCuocXeUser";
+    public static String hoanThanh = "hoanThanh";
+    public static String updateStarDriver="updateStarDriver";
 
     public static String formatNumber(int number) {
         if (number < 1000) {

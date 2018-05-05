@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dp5"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/layout_emoji"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_search_to_from"
@@ -42,6 +45,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/vui"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -64,6 +68,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/buon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -88,6 +93,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layout_danh_gia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_search_to_from"
@@ -113,12 +119,12 @@
             android:textColor="@color/color_black" />
 
         <com.willy.ratingbar.ScaleRatingBar
-            android:id="@+id/simpleRatingBar"
+            android:id="@+id/ratingBarDriver"
+            app:srb_stepSize="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srb_drawableEmpty="@drawable/start_empty"
-            app:srb_drawableFilled="@drawable/star_filled"
-            app:srb_stepSize="0.1"></com.willy.ratingbar.ScaleRatingBar>
+            android:layout_gravity="center" />
+
 
         <TextView
             style="@style/TextAppearance.AppCompat.Caption"
@@ -130,6 +136,7 @@
             android:textColor="@color/color_black" />
 
         <EditText
+            android:id="@+id/edt_nhan_xet"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -140,6 +147,7 @@
             android:textColor="@color/color_black" />
 
         <TextView
+            android:id="@+id/btn_gui"
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.doan.R;
 import com.willy.ratingbar.ScaleRatingBar;
 
@@ -22,8 +23,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import core.MainActivity;
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.socket.emitter.Emitter;
-import login.LoginActivity;
 import myutil.MyBitmap;
 import myutil.MyCache;
 import myutil.MyLog;
@@ -40,16 +41,18 @@ public class ProfileActivity extends AppCompatActivity {
     ProgressBar pgbarLoad;
     @BindView(R.id.im_back)
     ImageView imBack;
-    @BindView(R.id.im_profile)
-    ImageView imProfile;
     @BindView(R.id.tv_name)
     TextView tvName;
-    @BindView(R.id.tv_number_rate_rate)
-    TextView tvNumberRateRate;
     @BindView(R.id.ratingBar)
     ScaleRatingBar ratingBar;
     @BindView(R.id.tv_infor_xe)
     TextView tvInforXe;
+    @BindView(R.id.tv_logout)
+    TextView tvLogout;
+    @BindView(R.id.tv_number_rate_rate)
+    TextView tvNumberRateRate;
+    @BindView(R.id.profile_image)
+    CircleImageView profileImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,10 +99,12 @@ public class ProfileActivity extends AppCompatActivity {
                                     MyLog.e(getClass(), args[0].toString());
                                     Driver driver = Driver.fromJSON(args[0].toString());
                                     tvName.setText(driver.getName());
-                                    imProfile.setImageBitmap(MyBitmap.StringBase64ToBimap(driver.getImChanDung()));
                                     tvInforXe.setText(driver.getInforXe());
 //                                    tvPhoneNumber.setText(customer.getSdt());
+                                    tvNumberRateRate.setText(driver.getRateNumber1() + "");
+                                    ratingBar.setRating((float) driver.getRateStar());
 //                                    edtName.setText(customer.getName());
+                                    Glide.with(ProfileActivity.this).load(MyBitmap.Base64ToByte(driver.getImChanDung())).into(profileImage);
                                 }
                             });
                         }
@@ -125,6 +130,11 @@ public class ProfileActivity extends AppCompatActivity {
         Intent intent = new Intent(this, WellcomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.im_back)
+    public void onViewClicked2() {
+        finish();
     }
 
 //    @OnClick({R.id.im_back, R.id.tv_save, R.id.logout})

@@ -15,8 +15,8 @@ public class Driver {
     String imGTX2;
     String imBaoHiem1;
     String imBaoHiem2;
-    String rateNumber1;
-    String rateStar;
+    int rateNumber;
+    double rateStar;
     double lat;
     double lng;
     boolean isReady;
@@ -88,6 +88,11 @@ public class Driver {
 
     public String getImChanDung() {
         return imChanDung;
+    }
+
+    public Driver(String phoneNumber, double rateStar) {
+        this.phoneNumber = phoneNumber;
+        this.rateStar = rateStar;
     }
 
     public void setImChanDung(String imChanDung) {
@@ -173,12 +178,28 @@ public class Driver {
         this.imBaoHiem2 = imBaoHiem2;
     }
 
-    public String getRateNumber1() {
-        return rateNumber1;
+    public int getRateNumber1() {
+        return rateNumber;
     }
 
-    public void setRateNumber1(String rateNumber1) {
-        this.rateNumber1 = rateNumber1;
+    public void setRateNumber1(int rateNumber1) {
+        this.rateNumber = rateNumber1;
+    }
+
+    public double getRateStar() {
+        return rateStar;
+    }
+
+    public void setRateStar(double rateStar) {
+        this.rateStar = rateStar;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 
     public String toJSON() {
@@ -197,11 +218,5 @@ public class Driver {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getRateStar() {
-        return rateStar;
-    }
 
-    public void setRateStar(String rateStar) {
-        this.rateStar = rateStar;
-    }
 }

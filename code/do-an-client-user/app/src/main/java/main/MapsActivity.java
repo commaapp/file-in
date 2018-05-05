@@ -10,12 +10,16 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.doan.R;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
@@ -31,7 +35,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.willy.ratingbar.ScaleRatingBar;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +43,11 @@ import book.BookActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
+import done.DoneActivity;
 import io.socket.emitter.Emitter;
 import map.CustemMaps;
+import myutil.MyBitmap;
 import myutil.MyCache;
 import myutil.MyLog;
 import obj.Book;
@@ -66,8 +72,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LinearLayout layoutInforDriverBook;
     @BindView(R.id.tv_bien_so_xe)
     TextView tvBienSoXe;
-    @BindView(R.id.im_profile)
-    ImageView imProfile;
     @BindView(R.id.tv_name_driver)
     TextView tvNameDriver;
     @BindView(R.id.ratingBar)
@@ -78,6 +82,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     ImageButton imBtnSms;
     @BindView(R.id.tv_time_come)
     TextView tvTimeCome;
+    @BindView(R.id.profile_image)
+    CircleImageView profileImage;
     private GoogleMap mMap;
     private Marker mMarkerFrom;
     private Marker mMarkerTo;
@@ -109,9 +115,50 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     initMap();
                 }
             });
-
+            mMyService.getSocket().on(Config.HUY_CUOC, new Emitter.Listener() {
+                @Override
+                public void call(final Object... args) {
+                    MapsActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Book book = Book.fromJSON(args[0].toString());
+                                if (book.getPhoneCutomer().equals(MyCache.getStringValueByName(MapsActivity.this, Config.MY_CACHE, Config.ACCOUNT_PHONE_NUMBER))) {
+                                    Toast.makeText(MapsActivity.this, "Cuốc xe đã bị hủy", Toast.LENGTH_SHORT).show();
+                                    showLayoutBook();
+                                }
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+                }
+            });
+            mMyService.getSocket().on(Config.hoanThanh, new Emitter.Listener() {
+                @Override
+                public void call(final Object... args) {
+                    MapsActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Book book = Book.fromJSON(args[0].toString());
+                                if (book.getPhoneCutomer().equals(MyCache.getStringValueByName(MapsActivity.this, Config.MY_CACHE, Config.ACCOUNT_PHONE_NUMBER))) {
+                                    showLayoutBook();
+                                    startDone(book);
+                                }
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+                }
+            });
         }
     };
+
+    private void startDone(Book book) {
+        Intent intent = new Intent(this, DoneActivity.class);
+        intent.putExtra(Config.DONE_INTENT, book);
+        startActivity(intent);
+    }
 
 
     @Override
@@ -193,7 +240,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onPlaceSelected(Place place) {
                 initLatLngTo(place.getLatLng());
-
             }
 
             @Override
@@ -300,24 +346,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+
     @OnClick(R.id.fab_my_location)
     public void onViewClicked() {
         mCustemMaps.moveToMyLocation();
+    }
+
+    public void showDialogInforTaiXe(Book mBook) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialog_infor_taixe, null);
+        ViewHolder viewHolder = new ViewHolder(dialogView);
+        Glide.with(this).load(MyBitmap.Base64ToByte(mBook.getDriver().getImChanDung())).into(viewHolder.profileImage);
+        viewHolder.tvNameDriver.setText(mBook.getDriver().getName());
+        viewHolder.tvInforXe.setText(mBook.getDriver().getInforXe());
+        viewHolder.tvInforXe.setText(mBook.getDriver().getInforXe());
+        viewHolder.ratingBarDriver.setRating((float) mBook.getDriver().getRateStar());
+        dialogBuilder.setView(dialogView);
+        AlertDialog b = dialogBuilder.create();
+        b.show();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == Config.RESULT_CODE_TAI_XE) {
-            MyLog.e(getClass(), "RESULT_OK");
             MyLog.e(getClass(), data.getStringExtra(Config.BOOK_CHAP_NHAN));
-            Snackbar.make(layoutBook, "Tìm thấy một tài xế", Snackbar.LENGTH_SHORT).show();
+//            Snackbar.make(layoutBook, "Tìm thấy một tài xế", Snackbar.LENGTH_SHORT).show();
             showLayoutInforTaiXe();
-            mBook =  Book.fromJSON(data.getStringExtra(Config.BOOK_CHAP_NHAN));
+            mBook = Book.fromJSON(data.getStringExtra(Config.BOOK_CHAP_NHAN));
             tvBienSoXe.setText(mBook.getDriver().getInforXe());
             tvTimeCome.setText(getString(R.string.for_minute).replace("%d", (int) (mBook.getDistance() * 30 / 60) + ""));
             tvNameDriver.setText(mBook.getDriver().getName());
-//            ratingBar.setRating(Float.parseFloat(mBook.getDriver().getRateStar()));
+            ratingBar.setRating((float) mBook.getDriver().getRateStar());
+            Glide.with(this).load(MyBitmap.Base64ToByte(mBook.getDriver().getImChanDung())).into(profileImage);
+            showDialogInforTaiXe(mBook);
+
+
         }
         if (resultCode == RESULT_CANCELED && requestCode == Config.RESULT_CODE_TAI_XE) {
             Snackbar.make(layoutBook, "Không tìm thấy tài xế nào. Vui lòng thử lại sau ít phút!", Snackbar.LENGTH_SHORT).show();
@@ -366,5 +431,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @OnClick(R.id.ic_huy_cuoc)
     public void onViewClicked2() {
+        mMyService.huyCuocXe();
+    }
+
+
+    static class ViewHolder {
+        @BindView(R.id.profile_image)
+        CircleImageView profileImage;
+        @BindView(R.id.tv_name_driver)
+        TextView tvNameDriver;
+        @BindView(R.id.ratingBarDriver)
+        ScaleRatingBar ratingBarDriver;
+        @BindView(R.id.tv_infor_xe)
+        TextView tvInforXe;
+
+        ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }

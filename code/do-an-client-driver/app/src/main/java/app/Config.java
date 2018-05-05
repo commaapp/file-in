@@ -18,18 +18,15 @@ public class Config {
     public static final String ACCOUNT_NAME = "ACCOUNT_CUSTOMER_NAME";
     public static final String EMIT_REQUEST_LOGIN = "EMIT_CUSTOMER_REQUEST_LOGIN";
     public static final String ON_REQUEST_LOGIN = "ON_CUSTOMER_REQUEST_LOGIN";
-
-
     public static final String CLIENT_CUSTEMER_CONNECT = "CLIENT_CUSTOMER_CONNECT_SUCCES";
-
-
     public static final String DRIPER_PHONE_NUMBER = "DRIPER_PHONE_NUMBER";
     public static final String NOTIFY = "notify";
-
+    public static final String HUY_CUOC = "HUY_CUOC";
+    public static final String CHECK_BOOK_RES = "CHECK_BOOK_RES";
+    public static final String CHECK_BOOK = "CHECK_BOOK";
+    public static final int THANH_TOAN = 123;
     public static String Custemer_Check_Login = "Custemer_Check_Login";
     public static String Custemer_Check_Login_Res = "Custemer_Check_Login_Res";
-
-
     public static String checkDriverIsExists_Res = "checkDriverIsExists_Res";
     public static String checkDriverIsExists = "checkDriverIsExists";
     public static String Driver_Regitor_Res = "Driver_Regitor_Res";
@@ -46,6 +43,8 @@ public class Config {
     public static String huyCuoc = "huyCuoc";
     public static String tuChoiCuoc = "tuChoiCuoc";
     public static String chapNhanCuoc = "chapNhanCuoc";
+    public static String huyCuocXe = "huyCuocXeDriver";
+    public static String thanhToan = "thanhToan";
 
     public static String formatNumber(int number) {
         if (number < 1000) {

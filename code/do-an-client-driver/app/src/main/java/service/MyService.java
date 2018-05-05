@@ -64,15 +64,19 @@ public class MyService extends Service implements SensorEventListener {
     private Emitter.Listener onNewOkBook = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            MyLog.e(getClass(),"onNewOkBook");
-            MyLog.e(getClass(),args[0].toString());
-            Book book = Book.fromJSON(args[0].toString());
-            if (book.getPhoneDriver().equals(MyCache.getStringValueByName(MyService.this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER))) {
-                Intent intent = new Intent(MyService.this, NhanCuocActivity.class);
-                intent.putExtra(Config.NEW_BOOK, args[0].toString());
-                updateDriverState(false);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+            MyLog.e(getClass(), "onNewOkBook");
+            try {
+                MyLog.e(getClass(), args[0].toString());
+                Book book = Book.fromJSON(args[0].toString());
+                if (book.getPhoneDriver().equals(MyCache.getStringValueByName(MyService.this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER))) {
+                    Intent intent = new Intent(MyService.this, NhanCuocActivity.class);
+                    intent.putExtra(Config.NEW_BOOK, args[0].toString());
+                    updateDriverState(false);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            } catch (Exception e) {
+
             }
         }
     };
@@ -335,8 +339,8 @@ public class MyService extends Service implements SensorEventListener {
         mSocket.emit(Config.getCustomerOnline, MyCache.getStringValueByName(this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER));
     }
 
-    public void huyCuoc() {
-
+    public void huyCuocXe() {
+        mSocket.emit(Config.huyCuocXe, MyCache.getStringValueByName(this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER));
     }
 
     public void tuChoiCuoc() {
@@ -346,6 +350,16 @@ public class MyService extends Service implements SensorEventListener {
 
     public void chapNhanCuoc() {
         mSocket.emit(Config.chapNhanCuoc, MyCache.getStringValueByName(this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER));
+    }
+
+    public void checkBook(Emitter.Listener listener) {
+        mSocket.on(Config.CHECK_BOOK_RES, listener);
+        mSocket.emit(Config.CHECK_BOOK, MyCache.getStringValueByName(this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER));
+    }
+
+    public void thanhToan() {
+        updateDriverState(true);
+        mSocket.emit(Config.thanhToan, MyCache.getStringValueByName(this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER));
     }
 
     public class MyBinder extends Binder {

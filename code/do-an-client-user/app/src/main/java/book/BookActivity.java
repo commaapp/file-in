@@ -7,10 +7,15 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.doan.R;
+import com.willy.ratingbar.ScaleRatingBar;
 
 import app.Config;
 import butterknife.BindView;
@@ -45,6 +50,7 @@ public class BookActivity extends AppCompatActivity {
         connectMyService();
     }
 
+
     private MyService mMyService;
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -66,7 +72,7 @@ public class BookActivity extends AppCompatActivity {
                                 MyLog.e(getClass(), args[0].toString());
                                 Intent data = new Intent();
                                 data.putExtra(Config.BOOK_CHAP_NHAN, args[0].toString());
-                                setResult(RESULT_OK,data);
+                                setResult(RESULT_OK, data);
                                 finish();
                             } catch (Exception e) {
                                 setResult(RESULT_CANCELED);
@@ -121,11 +127,10 @@ public class BookActivity extends AppCompatActivity {
         Intent intentMyService = new Intent(this, MyService.class);
         bindService(intentMyService, serviceConnection, Context.BIND_AUTO_CREATE);
     }
-
-
     @Override
     protected void onDestroy() {
         mMyService.getSocket().off(Config.NEW_OK_BOOK_CUSTOMER);
+//        mMyService.huyCuocXe();
         unbindService(serviceConnection);
         super.onDestroy();
     }
@@ -148,4 +153,6 @@ public class BookActivity extends AppCompatActivity {
         setResult(RESULT_CANCELED);
         finish();
     }
+
+
 }
