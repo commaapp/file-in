@@ -104,7 +104,12 @@ public class ProfileActivity extends AppCompatActivity {
                                     tvNumberRateRate.setText(driver.getRateNumber1() + "");
                                     ratingBar.setRating((float) driver.getRateStar());
 //                                    edtName.setText(customer.getName());
-                                    Glide.with(ProfileActivity.this).load(MyBitmap.Base64ToByte(driver.getImChanDung())).into(profileImage);
+                                    try {
+//                                        Glide.with(ProfileActivity.this).load(MyBitmap.Base64ToByte(driver.getImChanDung())).into(profileImage);
+                                    }catch (Exception e){
+
+                                    }
+
                                 }
                             });
                         }

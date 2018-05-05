@@ -31,15 +31,15 @@ public class ThanhToanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_thanh_toan);
         ButterKnife.bind(this);
-        mBook = (Book) Book.fromJSON(getIntent().getStringExtra(Config.NEW_BOOK));
-        initView();
+//        mBook = (Book) Book.fromJSON(getIntent().getStringExtra(Config.NEW_BOOK));
+//        initView();
     }
 
     private void initView() {
         tvNameCustemer.setText(mBook.getCustomer().getName());
         tvQuangDuong.setText(getString(R.string.cost).replace("%d", mBook.getKm() + ""));
         tvTienOnKm.setText(getString(R.string.cost).replace("%d", 6000 + ""));
-        tvTong.setText(getString(R.string.cost).replace("%d", Config.formatNumber(mBook.getCost()) + ""));
+        tvTong.setText(getString(R.string.km_book).replace("%d", Config.formatNumber(mBook.getCost()) + ""));
     }
 
     @OnClick(R.id.tv_done)

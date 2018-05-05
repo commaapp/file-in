@@ -45,7 +45,9 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name="done.DoneActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+
+        </activity>
     </application>
 
 </manifest>

@@ -104,18 +104,21 @@ public class BookActivity extends AppCompatActivity {
                 BookActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        try {
-                            Driver driver = Driver.fromJSON(args[0].toString());
+//                        try {
+//                            Driver driver = Driver.fromJSON(args[0].toString());
 //                            if (driver instanceof Driver) {
 //                                setResult(RESULT_OK);
 //                                finish();
 //                            } else {
-                            setResult(RESULT_CANCELED);
-                            finish();
+                                MyLog.e(getClass(), "bookFindDriver  RESULT_CANCELED");
+                                setResult(RESULT_CANCELED);
+                                finish();
 //                            }
-                        } catch (Exception e) {
-
-                        }
+//                        } catch (Exception e) {
+//                            MyLog.e(getClass(), "bookFindDriver  RESULT_CANCELED_Exception");
+//                            setResult(RESULT_CANCELED);
+//                            finish();
+//                        }
 
                     }
                 });
@@ -127,6 +130,7 @@ public class BookActivity extends AppCompatActivity {
         Intent intentMyService = new Intent(this, MyService.class);
         bindService(intentMyService, serviceConnection, Context.BIND_AUTO_CREATE);
     }
+
     @Override
     protected void onDestroy() {
         mMyService.getSocket().off(Config.NEW_OK_BOOK_CUSTOMER);

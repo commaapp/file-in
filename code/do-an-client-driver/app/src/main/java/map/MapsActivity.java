@@ -178,17 +178,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void setMatDo() {
-//        try {
-//            mLatLngMatDos.addAll(readItems());
-//        } catch (JSONException e) {
-//
-//        }
-        mProvider = new HeatmapTileProvider.Builder()
-                .data(mLatLngMatDos)
-                .build();
+        try {
+            mProvider = new HeatmapTileProvider.Builder()
+                    .data(mLatLngMatDos)
+                    .build();
 
-        if (mOverlay != null) mOverlay.clearTileCache();
-        mOverlay = mCustemMaps.getGoogleMap().addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
+            if (mOverlay != null) mOverlay.clearTileCache();
+            mOverlay = mCustemMaps.getGoogleMap().addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
+
+        } catch (Exception e) {
+
+        }
 
 
     }

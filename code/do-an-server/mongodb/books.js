@@ -16,10 +16,20 @@ module.exports = {
         init(function (db) {
             db.db(nameDatabase).collection(nameCollection).findOne(query, function (err, result) {
                 if (err) throw err;
-                console.log(result)
                 callback(result)
                 return
             });
         })
     },
+    delete: function (query) {
+        init(function (db) {
+            db.db(nameDatabase).collection(nameCollection).deleteOne(query, function (err, obj) {
+                if (err) throw err;
+                console.log("1 document deleted");
+                db.close();
+            });
+        })
+    },
+
+
 }

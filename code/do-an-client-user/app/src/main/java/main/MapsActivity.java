@@ -357,7 +357,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.dialog_infor_taixe, null);
         ViewHolder viewHolder = new ViewHolder(dialogView);
-        Glide.with(this).load(MyBitmap.Base64ToByte(mBook.getDriver().getImChanDung())).into(viewHolder.profileImage);
+//        Glide.with(this).load(MyBitmap.Base64ToByte(mBook.getDriver().getImChanDung())).into(viewHolder.profileImage);
         viewHolder.tvNameDriver.setText(mBook.getDriver().getName());
         viewHolder.tvInforXe.setText(mBook.getDriver().getInforXe());
         viewHolder.tvInforXe.setText(mBook.getDriver().getInforXe());
@@ -370,7 +370,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == Config.RESULT_CODE_TAI_XE) {
+        if (resultCode == RESULT_OK) {
             MyLog.e(getClass(), data.getStringExtra(Config.BOOK_CHAP_NHAN));
 //            Snackbar.make(layoutBook, "Tìm thấy một tài xế", Snackbar.LENGTH_SHORT).show();
             showLayoutInforTaiXe();
@@ -379,12 +379,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             tvTimeCome.setText(getString(R.string.for_minute).replace("%d", (int) (mBook.getDistance() * 30 / 60) + ""));
             tvNameDriver.setText(mBook.getDriver().getName());
             ratingBar.setRating((float) mBook.getDriver().getRateStar());
-            Glide.with(this).load(MyBitmap.Base64ToByte(mBook.getDriver().getImChanDung())).into(profileImage);
+//            Glide.with(this).load(MyBitmap.Base64ToByte(mBook.getDriver().getImChanDung())).into(profileImage);
             showDialogInforTaiXe(mBook);
-
-
         }
-        if (resultCode == RESULT_CANCELED && requestCode == Config.RESULT_CODE_TAI_XE) {
+        if (resultCode == RESULT_CANCELED
+//                && requestCode == Config.RESULT_CODE_TAI_XE
+                ) {
             Snackbar.make(layoutBook, "Không tìm thấy tài xế nào. Vui lòng thử lại sau ít phút!", Snackbar.LENGTH_SHORT).show();
             MyLog.e(getClass(), "RESULT_CANCELED");
         }

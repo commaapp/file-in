@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/cost_book"
+                android:text="6000 VNĐ"
                 android:textColor="@color/color_white" />
         </LinearLayout>
 
@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/km_book"
+                android:text="1.17 KM"
                 android:textColor="@color/color_white" />
         </LinearLayout>
 
@@ -135,7 +135,7 @@
                 android:background="@color/color_grey"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="@string/cost_book"
+                android:text="7.020 VNĐ"
                 android:textColor="@color/color_white" />
         </LinearLayout>
     </LinearLayout>
