@@ -27,6 +27,7 @@
             android:padding="@dimen/dp10">
 
             <TextView
+                android:id="@+id/tv_name_custemer"
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -43,7 +44,7 @@
                 android:background="@color/color_yellow"
                 android:gravity="center"
                 android:padding="@dimen/dp4"
-                android:text="@string/book_category"
+                android:text="@string/bike"
                 android:textColor="@color/color_black" />
         </LinearLayout>
 
@@ -70,6 +71,7 @@
                 android:textColor="@color/color_white" />
 
             <TextView
+                android:id="@+id/tv_tien_on_km"
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,6 +96,7 @@
                 android:textColor="@color/color_white" />
 
             <TextView
+                android:id="@+id/tv_quang_duong"
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,6 +128,7 @@
                 android:textColor="@color/color_white" />
 
             <TextView
+                android:id="@+id/tv_tong"
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -135,7 +139,9 @@
                 android:textColor="@color/color_white" />
         </LinearLayout>
     </LinearLayout>
+
     <TextView
+        android:id="@+id/tv_done"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

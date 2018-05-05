@@ -10,7 +10,6 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,8 +21,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Marker;
 
-import org.json.JSONException;
-
 import app.Config;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,9 +28,9 @@ import butterknife.OnClick;
 import core.MainActivity;
 import map.CustemMaps;
 import myutil.MyLog;
-import newbook.NewBookActivity;
 import obj.Book;
 import service.MyService;
+import thanhtoan.ThanhToanActivity;
 
 public class NhanCuocActivity extends AppCompatActivity implements OnMapReadyCallback {
     @BindView(R.id.tv_name_customer)
@@ -66,7 +63,6 @@ public class NhanCuocActivity extends AppCompatActivity implements OnMapReadyCal
         setContentView(R.layout.activity_sau_khi_nhan_quoc);
         ButterKnife.bind(this);
         mBook = (Book) Book.fromJSON(getIntent().getStringExtra(Config.NEW_BOOK));
-        ;
         initView();
         connectMyService();
         initMap();
@@ -120,14 +116,14 @@ public class NhanCuocActivity extends AppCompatActivity implements OnMapReadyCal
 
     @OnClick(R.id.ic_from)
     public void onIcFromClicked() {
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+        Intent intent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("http://maps.google.com/maps?saddr=" + mCustemMaps.getMyLocation().getLatitude() + "," + mCustemMaps.getMyLocation().getLongitude() + "&daddr=" + mBook.getLatFrom() + "," + mBook.getLngFrom()));
         startActivity(intent);
     }
 
     @OnClick(R.id.ic_to)
     public void onIcToClicked() {
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+        Intent intent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("http://maps.google.com/maps?saddr=" + mCustemMaps.getMyLocation().getLatitude() + "," + mCustemMaps.getMyLocation().getLongitude() + "&daddr=" + mBook.getLatTo() + "," + mBook.getLngTo()));
         startActivity(intent);
     }
@@ -146,7 +142,7 @@ public class NhanCuocActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
     public void sendSMS() {
-        String number = "12346556";  // The number on which you want to send SMS
+        String number = mBook.getCustomer().getSdt();  // The number on which you want to send SMS
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", number, null)));
     }
 
@@ -167,9 +163,16 @@ public class NhanCuocActivity extends AppCompatActivity implements OnMapReadyCal
         mCustemMaps.moveToMyLocation();
         Marker from = mCustemMaps.drawMarker(mBook.getLatFrom(), mBook.getLngFrom(), BitmapDescriptorFactory.fromResource(R.drawable.ic_circle), "Điểm đón", mCustemMaps.getNameByLocation(mBook.getLatFrom(), mBook.getLngFrom()));
         from.setRotation(0);
-        from.setFlat(false);
+        from.setFlat(true);
         Marker to = mCustemMaps.drawMarker(mBook.getLatTo(), mBook.getLngTo(), BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED), "Điểm đến", mCustemMaps.getNameByLocation(mBook.getLatTo(), mBook.getLngTo()));
         to.setRotation(0);
-        from.setFlat(false);
+        to.setFlat(true);
+    }
+
+    @OnClick(R.id.ic_thanh_toan)
+    public void onViewClicked() {
+        Intent intent = new Intent(this, ThanhToanActivity.class);
+        intent.putExtra(Config.NEW_BOOK, getIntent().getStringExtra(Config.NEW_BOOK));
+        startActivity(intent);
     }
 }

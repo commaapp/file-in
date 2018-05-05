@@ -34,6 +34,12 @@ public class MyService extends Service {
         public void call(Object... args) {
         }
     };
+    private Emitter.Listener onNewOkBookCustomer=new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+
+        }
+    };
 
     {
         try {
@@ -91,6 +97,7 @@ public class MyService extends Service {
         mSocket.on(Config.CLIENT_CUSTEMER_CONNECT, CLIENT_CUSTEMER_CONNECT);
         mSocket.on(Config.NOTIFY, onNotify);
         mSocket.on(Config.NEW_OK_BOOK, onNewOkBook);
+        mSocket.on(Config.NEW_OK_BOOK_CUSTOMER, onNewOkBookCustomer);
         mSocket.connect();
         return START_NOT_STICKY;
     }

@@ -55,10 +55,32 @@ public class BookActivity extends AppCompatActivity {
         public void onServiceConnected(ComponentName name, IBinder service) {
             MyService.MyBinder binder = (MyService.MyBinder) service;
             mMyService = binder.getMyService();
+            mMyService.getSocket().on(Config.NEW_OK_BOOK_CUSTOMER, new Emitter.Listener() {
+                @Override
+                public void call(final Object... args) {
+                    BookActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                MyLog.e(getClass(), "đã về");
+                                MyLog.e(getClass(), args[0].toString());
+                                Intent data = new Intent();
+                                data.putExtra(Config.BOOK_CHAP_NHAN, args[0].toString());
+                                setResult(RESULT_OK,data);
+                                finish();
+                            } catch (Exception e) {
+                                setResult(RESULT_CANCELED);
+                                finish();
+                            }
+                        }
+                    });
+                }
+            });
             BookActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     findDriver();
+
                 }
             });
 
@@ -78,13 +100,13 @@ public class BookActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             Driver driver = Driver.fromJSON(args[0].toString());
-                            if (driver instanceof Driver) {
-                                setResult(RESULT_OK);
-                                finish();
-                            } else {
-                                setResult(RESULT_CANCELED);
-                                finish();
-                            }
+//                            if (driver instanceof Driver) {
+//                                setResult(RESULT_OK);
+//                                finish();
+//                            } else {
+                            setResult(RESULT_CANCELED);
+                            finish();
+//                            }
                         } catch (Exception e) {
 
                         }
@@ -103,6 +125,7 @@ public class BookActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        mMyService.getSocket().off(Config.NEW_OK_BOOK_CUSTOMER);
         unbindService(serviceConnection);
         super.onDestroy();
     }

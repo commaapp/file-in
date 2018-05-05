@@ -46,6 +46,15 @@ public class Book implements Serializable {
     int cost;
     Driver driver;
     Customer customer;
+    double distance;
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
 
     public Driver getDriver() {
         return driver;

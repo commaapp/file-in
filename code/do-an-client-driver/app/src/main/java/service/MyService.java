@@ -64,12 +64,16 @@ public class MyService extends Service implements SensorEventListener {
     private Emitter.Listener onNewOkBook = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
+            MyLog.e(getClass(),"onNewOkBook");
+            MyLog.e(getClass(),args[0].toString());
             Book book = Book.fromJSON(args[0].toString());
-            Intent intent = new Intent(MyService.this, NhanCuocActivity.class);
-            intent.putExtra(Config.NEW_BOOK, args[0].toString());
-            updateDriverState(false);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            if (book.getPhoneDriver().equals(MyCache.getStringValueByName(MyService.this, Config.MY_CACHE, Config.DRIPER_PHONE_NUMBER))) {
+                Intent intent = new Intent(MyService.this, NhanCuocActivity.class);
+                intent.putExtra(Config.NEW_BOOK, args[0].toString());
+                updateDriverState(false);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
         }
     };
 

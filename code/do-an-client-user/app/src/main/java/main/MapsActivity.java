@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,7 +29,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.willy.ratingbar.ScaleRatingBar;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +62,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LinearLayout layoutItemBook;
     @BindView(R.id.tv_cost)
     TextView tvCost;
+    @BindView(R.id.layout_infor_driver_book)
+    LinearLayout layoutInforDriverBook;
+    @BindView(R.id.tv_bien_so_xe)
+    TextView tvBienSoXe;
+    @BindView(R.id.im_profile)
+    ImageView imProfile;
+    @BindView(R.id.tv_name_driver)
+    TextView tvNameDriver;
+    @BindView(R.id.ratingBar)
+    ScaleRatingBar ratingBar;
+    @BindView(R.id.im_btn_call)
+    ImageButton imBtnCall;
+    @BindView(R.id.im_btn_sms)
+    ImageButton imBtnSms;
+    @BindView(R.id.tv_time_come)
+    TextView tvTimeCome;
     private GoogleMap mMap;
     private Marker mMarkerFrom;
     private Marker mMarkerTo;
@@ -65,6 +85,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ArrayList<Marker> mDriverMarker = new ArrayList<>();
     private int cost;
     private double distance;
+    private Book mBook;
 
     private void connectMyService() {
         Intent intentMyService = new Intent(this, MyService.class);
@@ -109,6 +130,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         ButterKnife.bind(this);
         layoutItemBook.setVisibility(View.GONE);
         connectMyService();
+        showLayoutBook();
+    }
+
+    private void showLayoutInforTaiXe() {
+        layoutInforDriverBook.setVisibility(View.VISIBLE);
+        layoutBook.setVisibility(View.GONE);
+    }
+
+    private void showLayoutBook() {
+        layoutInforDriverBook.setVisibility(View.GONE);
+        layoutBook.setVisibility(View.VISIBLE);
     }
 
     LatLng mLatLngFrom;
@@ -278,7 +310,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == Config.RESULT_CODE_TAI_XE) {
             MyLog.e(getClass(), "RESULT_OK");
+            MyLog.e(getClass(), data.getStringExtra(Config.BOOK_CHAP_NHAN));
             Snackbar.make(layoutBook, "Tìm thấy một tài xế", Snackbar.LENGTH_SHORT).show();
+            showLayoutInforTaiXe();
+            mBook =  Book.fromJSON(data.getStringExtra(Config.BOOK_CHAP_NHAN));
+            tvBienSoXe.setText(mBook.getDriver().getInforXe());
+            tvTimeCome.setText(getString(R.string.for_minute).replace("%d", (int) (mBook.getDistance() * 30 / 60) + ""));
+            tvNameDriver.setText(mBook.getDriver().getName());
+//            ratingBar.setRating(Float.parseFloat(mBook.getDriver().getRateStar()));
         }
         if (resultCode == RESULT_CANCELED && requestCode == Config.RESULT_CODE_TAI_XE) {
             Snackbar.make(layoutBook, "Không tìm thấy tài xế nào. Vui lòng thử lại sau ít phút!", Snackbar.LENGTH_SHORT).show();
@@ -304,5 +343,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             startActivityForResult(intent, Config.RESULT_CODE_TAI_XE);
         } else
             Snackbar.make(layoutBook, "Bạn cần lựa chọn điểm đi và điểm đến trước khi đặt xe!", Snackbar.LENGTH_SHORT).show();
+    }
+
+    @OnClick({R.id.im_btn_call, R.id.im_btn_sms})
+    public void onViewClicked1(View view) {
+        switch (view.getId()) {
+            case R.id.im_btn_call:
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:" + mBook.getPhoneDriver()));
+                startActivity(intent);
+                break;
+            case R.id.im_btn_sms:
+                sendSMS();
+                break;
+        }
+    }
+
+    public void sendSMS() {
+        String number = mBook.getDriver().getPhoneNumber();  // The number on which you want to send SMS
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", number, null)));
+    }
+
+    @OnClick(R.id.ic_huy_cuoc)
+    public void onViewClicked2() {
     }
 }

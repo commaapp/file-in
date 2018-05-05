@@ -23,6 +23,8 @@ public class Config {
     public static final int RESULT_CODE_TAI_XE = 1070;
     public static final String BOOK_KEY = "BOOK_KEY";
     public static final String NEW_OK_BOOK = "NEW_OK_BOOK";
+    public static final String NEW_OK_BOOK_CUSTOMER = "NEW_OK_BOOK_CUSTOMER";
+    public static final String BOOK_CHAP_NHAN = "BOOK_CHAP_NHAN";
     public static String Vefify_Code_Res = "Vefify_Code_Res";
     public static String Custemer_Login = "Custemer_Login";
     public static String Custemer_Login_Res = "Custemer_Login_Res";

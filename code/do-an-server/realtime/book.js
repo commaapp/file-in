@@ -60,7 +60,7 @@ function findNewDriver(data, truDriver, socket, io) {
                     socket.emit('bookFindDriver_res', "null");
                 }
                 else {
-                    socket.emit('bookFindDriver_res', minDriver);
+                    // socket.emit('bookFindDriver_res', minDriver);
                     console.log('nhỏ nhất là ' + minDriver.name)
                     console.log('nhỏ nhất là ' + minDriver.distance)
                     data.phoneDriver = minDriver.phoneNumber
@@ -109,6 +109,31 @@ module.exports = function (socket, io) {
         //tìm cuốc xe vừa tài xế đã hủy
         books.findOne({phoneDriver: truDriver}, function (book) {
             findNewDriver(book, truDriver, socket, io);
+        })
+    })
+// gửi thông tin cuốc xe cho cả 2 ng
+    socket.on('chapNhanCuoc', function (truDriver) {
+        books.findOne({phoneDriver: truDriver}, function (book) {
+            io.sockets.emit("notify", "Cuốc xe mới được chấp nhận");
+            drivers.findOne(book.phoneDriver, function (driver) {
+                book.driver = driver
+                book.driver.imCMT1 = ""
+                book.driver.imCMT2 = ""
+                book.driver.imBLX1 = ""
+                book.driver.imBLX2 = ""
+                book.driver.imGTX1 = ""
+                book.driver.imCMT1 = ""
+                book.driver.imGTX2 = ""
+                book.driver.imBaoHiem1 = ""
+                book.driver.imBaoHiem2 = ""
+                io.sockets.emit("NEW_OK_BOOK_CUSTOMER", book);
+                customers.findOne(book.phoneCutomer, function (customer) {
+                    book.customer = customer
+                    io.sockets.emit("NEW_OK_BOOK_DRIVER", book);
+                })
+            })
+
+
         })
     })
 }

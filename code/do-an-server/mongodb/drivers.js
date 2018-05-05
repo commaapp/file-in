@@ -20,9 +20,9 @@ module.exports = {
 
     findOne: function (phoneNumber, callback) {
         init(function (db) {
-            console.log('findOne')
-            console.log('phoneNumber ' + phoneNumber)
-            console.log('nameCollection ' + nameCollection)
+            // console.log('findOne')
+            // console.log('phoneNumber ' + phoneNumber)
+            // console.log('nameCollection ' + nameCollection)
 
             db.db(nameDatabase).collection(nameCollection).findOne({phoneNumber: phoneNumber}, function (err, result) {
                 if (err) throw err;

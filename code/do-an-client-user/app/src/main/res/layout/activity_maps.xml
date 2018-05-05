@@ -162,6 +162,7 @@
                     android:textSize="@dimen/sp20" />
             </LinearLayout>
 
+            <include layout="@layout/layout_infor_taixe"></include>
         </LinearLayout>
 
 
